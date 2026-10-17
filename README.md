@@ -310,4 +310,4 @@ Concordance is written in the style of an MDAKit (an MDAnalysis toolkit: a separ
 
 ## How it was made
 
-Built by Lily S. (independent researcher, Kent, UK) during the hackathon, starting on the evening of Friday 16 October 2026 after the kickoff, with Claude (Anthropic) as a coding assistant. Every claim above was checked by running it, and the tests are in `tests/`.
+Built by Tamana Sisodiya (MIT Media Lab) during the hackathon, starting on the evening of Friday 16 October 2026 after the kickoff, with Claude (Anthropic) as a coding assistant. Every claim above was checked by running it, and the tests are in `tests/`.
