@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "concordance-md"
+version = "0.2.0"
+description = "Replicate-aware flexibility analysis for protein molecular dynamics, built on MDAnalysis"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Lily S." }]
+requires-python = ">=3.10"
+dependencies = [
+    "MDAnalysis>=2.8",
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "h5py>=3.8",
+    "mcp>=1.2,<2",
+]
+keywords = ["molecular dynamics", "MDAnalysis", "MDAKit", "RMSF", "reproducibility", "replicates"]
+
+[project.optional-dependencies]
+data = ["huggingface_hub>=0.23"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+concordance = "concordance.cli:main"
+concordance-mcp = "concordance.mcp_server:main"
+
+[tool.setuptools]
+packages = ["concordance"]
+
+[tool.setuptools.package-data]
+concordance = ["assets/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

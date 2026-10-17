@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use Concordance, please cite it as below, and please also cite MDAnalysis and any dataset you analyse."
+title: "Concordance: replicate-aware flexibility analysis for protein molecular dynamics"
+version: 0.2.0
+date-released: 2026-10-18
+license: MIT
+authors:
+  - family-names: Sisodiya
+    given-names: Tamana
+    alias: Lily S.
+    orcid: "https://orcid.org/0009-0004-4831-8971"
+    affiliation: "Independent Researcher, Kent, United Kingdom"
+keywords:
+  - molecular dynamics
+  - MDAnalysis
+  - reproducibility
+  - replicates
+  - RMSF
+references:
+  - type: article
+    title: "MDAnalysis: A toolkit for the analysis of molecular dynamics simulations"
+    authors:
+      - family-names: Michaud-Agrawal
+        given-names: Naveen
+      - family-names: Denning
+        given-names: Elizabeth J.
+      - family-names: Woolf
+        given-names: Thomas B.
+      - family-names: Beckstein
+        given-names: Oliver
+    journal: "Journal of Computational Chemistry"
+    volume: 32
+    start: 2319
+    year: 2011
+  - type: article
+    title: "mdCATH: A Large-Scale MD Dataset for Data-Driven Computational Biophysics"
+    authors:
+      - family-names: Mirarchi
+        given-names: Antonio
+      - family-names: Giorgino
+        given-names: Toni
+      - family-names: De Fabritiis
+        given-names: Gianni
+    journal: "Scientific Data"
+    volume: 11
+    start: 1299
+    year: 2024

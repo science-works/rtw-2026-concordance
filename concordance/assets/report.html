@@ -1,0 +1,1948 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="generator" content="Concordance __VERSION__">
+<title>__TITLE__</title>
+<style>
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: 400; font-display: swap; src: url(data:font/woff2;base64,__FONT400__) format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: 700; font-display: swap; src: url(data:font/woff2;base64,__FONT700__) format("woff2"); }
+
+:root {
+  color-scheme: light;
+  --page: #edf0f3; --panel: #ffffff; --stage: #ffffff; --strip: #0b1118; --sprocket: #39465a;
+  --ink: #0c1724; --ink-2: #3e5166; --muted: #6a7b8e; --rule: #dce2e8; --rule-strong: #aebac6;
+  --lift: 0 1px 2px rgba(12, 23, 36, 0.05), 0 8px 24px -12px rgba(12, 23, 36, 0.18);
+  --flex: #2a78d6; --dep: #eb6834; --one: #f2b48f; --none: #c3cbd3; --unscored: #e3e7eb;
+  --band: rgba(20, 33, 48, 0.10); --region: rgba(42, 120, 214, 0.09); --focus: #2a78d6;
+  --chip-yes: #e1edfb; --chip-no: #eceff2; --note-bg: #fff3e9; --note-ink: #6e2f0e;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0f141a; --panel: #161d26; --stage: #10161d; --strip: #05080b; --sprocket: #26313d;
+    --ink: #e7edf3; --ink-2: #b4c1ce; --muted: #8fa0b2; --rule: #27313d; --rule-strong: #3a4757;
+    --flex: #4b93ea; --dep: #f07a45; --one: #9b6248; --none: #4a5562; --unscored: #232c36;
+    --band: rgba(231, 237, 243, 0.12); --region: rgba(75, 147, 234, 0.14); --focus: #6aa7f0;
+    --lift: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+    --chip-yes: #1b2c42; --chip-no: #1f2731; --note-bg: #2a1d12; --note-ink: #f4c39f;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0f141a; --panel: #161d26; --stage: #10161d; --strip: #05080b; --sprocket: #26313d;
+  --ink: #e7edf3; --ink-2: #b4c1ce; --muted: #8fa0b2; --rule: #27313d; --rule-strong: #3a4757;
+  --flex: #4b93ea; --dep: #f07a45; --one: #9b6248; --none: #4a5562; --unscored: #232c36;
+  --band: rgba(231, 237, 243, 0.12); --region: rgba(75, 147, 234, 0.14); --focus: #6aa7f0;
+  --lift: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --chip-yes: #1b2c42; --chip-no: #1f2731; --note-bg: #2a1d12; --note-ink: #f4c39f;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--page); color: var(--ink);
+  font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px; line-height: 1.55;
+  font-synthesis-weight: none;
+}
+.page { max-width: 1240px; margin: 0 auto; padding: 20px 24px 64px; }
+h1, h2, h3 { margin: 0; font-weight: 700; }
+h1 { font-size: clamp(2rem, 1.15rem + 3vw, 3.1rem); line-height: 1.06; letter-spacing: -0.025em; max-width: 19ch; text-wrap: balance; }
+h2 { font-size: 1.24rem; line-height: 1.25; letter-spacing: -0.012em; }
+h3 { font-size: 1.02rem; line-height: 1.3; letter-spacing: -0.006em; }
+p { margin: 0; }
+a { color: inherit; text-underline-offset: 2px; }
+code, pre, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.86em; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.muted { color: var(--muted); }
+.prose { max-width: 66ch; }
+
+/* top bar */
+.topbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+.brand { display: flex; align-items: baseline; gap: 10px; margin-right: auto; min-width: 0; }
+.brand strong { font-size: 1.1rem; letter-spacing: -0.015em; }
+.brand span { color: var(--muted); font-size: 0.88rem; }
+@media (max-width: 1280px) { .topbar .brand span { display: none; } }
+.audience { display: flex; flex-wrap: wrap; border: 1px solid var(--rule-strong); border-radius: 999px; padding: 3px; margin: 0; background: var(--panel); }
+.audience legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.audience label { position: relative; cursor: pointer; }
+.audience input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.audience span { display: block; padding: 6px 13px; border-radius: 999px; font-size: 0.88rem; color: var(--ink-2); white-space: nowrap; }
+.audience input:checked + span { background: var(--ink); color: var(--page); font-weight: 700; }
+.audience input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 1px; }
+.top-actions { display: flex; gap: 8px; }
+.top-actions [hidden] { display: none; }
+.theme-toggle { background: none; border: 1px solid var(--rule-strong); border-radius: 999px; padding: 6px 13px; font-size: 0.88rem; cursor: pointer; color: var(--ink-2); white-space: nowrap; }
+.theme-toggle:hover { border-color: var(--muted); color: var(--ink); }
+
+/* audience-dependent blocks */
+[data-for] { display: none; }
+body[data-audience="new"] [data-for~="new"],
+body[data-audience="expert"] [data-for~="expert"],
+body[data-audience="check"] [data-for~="check"] { display: block; }
+
+body[data-audience="new"] .col-detail { display: none; }
+.run-id { display: block; font-weight: 400; color: var(--muted); font-size: 0.85rem; }
+body[data-audience="new"] .run-id { display: none; }
+.note.warn { background: var(--note-bg); color: var(--note-ink); border-left: 4px solid var(--dep); }
+.note { margin-top: 18px; padding: 10px 14px; border-radius: 8px; background: var(--note-bg); color: var(--note-ink); font-size: 0.95rem; }
+
+/* question and verdict */
+.hero { padding: 40px 0 30px; display: grid; gap: 16px; max-width: 780px; }
+.hero > * { margin: 0; }
+.context { order: 4; color: var(--muted); font-size: 0.88rem; line-height: 1.45; padding-top: 12px; border-top: 1px solid var(--rule); }
+.verdict { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; font-size: 1.32rem; line-height: 1.42; letter-spacing: -0.008em; text-wrap: pretty; }
+.hero .risk { font-size: 1rem; max-width: none; text-wrap: pretty; }
+.pill { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px 4px 10px; border-radius: 999px; border: 1px solid var(--rule-strong); background: var(--panel); font-weight: 700; font-size: 1rem; }
+.dot { width: 12px; height: 12px; border-radius: 50%; flex: none; background: var(--none); }
+.risk { color: var(--ink-2); max-width: 64ch; }
+
+/* the five runs: the one loud element */
+.takes-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; margin: 6px 0 12px; }
+.takes-head .muted { font-size: 0.92rem; }
+.strip { position: relative; background: var(--strip); border-radius: 12px; padding: 20px 12px; box-shadow: var(--lift); }
+.strip::before, .strip::after {
+  content: ""; position: absolute; left: 14px; right: 14px; height: 5px;
+  background: repeating-linear-gradient(90deg, var(--sprocket) 0 9px, transparent 9px 22px);
+  border-radius: 2px;
+}
+.strip::before { top: 6px; }
+.strip::after { bottom: 6px; }
+.takes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); gap: 10px; }
+.take { background: var(--stage); border-radius: 3px; overflow: hidden; outline-offset: -2px; }
+body.no-3d .take .viewer { display: none; }
+body.no-3d .consensus .viewer { height: 160px; }
+.howto { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 24px; }
+.howto li { padding-left: 13px; border-left: 2px solid var(--rule-strong); font-size: 0.9rem; line-height: 1.42; color: var(--muted); }
+.howto b { display: block; color: var(--ink); font-size: 0.97rem; font-weight: 700; margin-bottom: 1px; }
+.howto .swatch { display: inline-block; vertical-align: -2px; margin-right: 4px; }
+.drop-page { display: grid; gap: 16px; padding: 28px 0; max-width: 860px; }
+.drop-page[hidden], main[hidden] { display: none; }
+.dropzone { display: grid; gap: 6px; place-items: center; text-align: center; padding: 36px 20px; border: 2px dashed var(--rule-strong); border-radius: 16px; background: var(--panel); cursor: pointer; color: var(--ink-2); }
+.dropzone strong { font-size: 1.15rem; color: var(--ink); }
+.dropzone.is-over, .dropzone:focus-within { border-color: var(--focus); background: var(--region); }
+.drop-files { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.drop-files li { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; padding: 8px 12px; border: 1px solid var(--rule); border-radius: 10px; background: var(--panel); font-size: 0.95rem; }
+.drop-files .bad { border-color: var(--dep); }
+.drop-files .meta { color: var(--muted); }
+.drop-options { display: flex; flex-wrap: wrap; gap: 12px; }
+.drop-options label { display: grid; gap: 4px; font-size: 0.9rem; color: var(--ink-2); flex: 1 1 240px; }
+.drop-options .ask-input { font-size: 1rem; padding: 8px 10px; }
+.drop-help ul { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 6px; }
+.drop-help code, .dropzone code { font-size: 0.88em; overflow-wrap: anywhere; }
+.btn-ask:disabled { opacity: 0.45; cursor: not-allowed; }
+body.dropping .audience { display: none; }
+.ask { margin: 10px 0 34px; padding: 22px 24px 20px; border: 0; border-radius: 16px; background: var(--panel); box-shadow: var(--lift); display: grid; gap: 12px; }
+.ask h2 { font-size: 1.02rem; color: var(--ink-2); font-weight: 700; letter-spacing: 0; }
+.ask-form { display: flex; gap: 8px; }
+.ask-input { flex: 1; min-width: 0; font: inherit; font-size: 1.12rem; padding: 13px 16px; border: 1.5px solid var(--rule-strong); border-radius: 12px; background: var(--page); color: var(--ink); transition: border-color 0.15s ease; }
+.ask-input:hover { border-color: var(--muted); }
+.ask-input:focus { border-color: var(--focus); outline: none; box-shadow: 0 0 0 3px var(--region); }
+.ask-input::placeholder { color: var(--muted); }
+.ask-input:focus-visible, .ask-chip:focus-visible, .btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.btn-ask { font: inherit; font-size: 1rem; font-weight: 700; padding: 10px 22px; border-radius: 12px; background: var(--ink); color: var(--panel); border: 1.5px solid var(--ink); cursor: pointer; }
+.btn-ask:hover { background: var(--ink-2); border-color: var(--ink-2); }
+.ask-suggest { display: flex; flex-wrap: wrap; gap: 6px; }
+.ask-chip { font: inherit; font-size: 0.9rem; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--rule-strong); background: var(--page); color: var(--ink-2); cursor: pointer; text-align: left; }
+.ask-chip:hover { border-color: var(--focus); color: var(--ink); }
+.ask-answer { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid var(--rule); }
+.ask-answer[hidden] { display: none; }
+.ask-answer > * { min-width: 0; max-width: 78ch; }
+.ask-you { font-size: 0.9rem; color: var(--muted); }
+.ask-lead { font-size: 1.1rem; font-weight: 700; }
+.ask-answer .verdict { font-size: 1rem; }
+.ask-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.ask-answer code { display: block; padding: 6px 8px; background: var(--page); border: 1px solid var(--rule); border-radius: 6px; overflow-x: auto; white-space: nowrap; font-size: 0.85rem; }
+.ask-answer.is-unknown { border-top-color: var(--dep); }
+.ask .hint { margin-top: 0; }
+.ask-note { font-size: 0.92rem; color: var(--muted); }
+.ask-more { border-top: 0; padding-top: 0; }
+.ask-more summary { font-size: 0.92rem; }
+.ask-more p { margin-top: 6px; color: var(--ink-2); }
+.ask-answer .ask-lead { font-size: 1.2rem; }
+.claude-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.claude-row[hidden], .claude-answer[hidden], .claude-audit[hidden], .claude-foot[hidden] { display: none; }
+.btn-claude { font: inherit; font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 10px; cursor: pointer; background: var(--panel); color: var(--ink); border: 2px solid var(--focus); }
+.btn-claude:hover { background: var(--region); }
+.btn-claude:disabled { opacity: 0.6; cursor: progress; }
+.claude-deep { font-size: 0.9rem; color: var(--ink-2); display: inline-flex; gap: 6px; align-items: center; }
+.claude-blurb { font-size: 0.88rem; color: var(--muted); flex: 1 1 260px; }
+.claude-link { font: inherit; font-size: 0.88rem; background: none; border: 0; padding: 0; color: var(--ink-2); text-decoration: underline; cursor: pointer; }
+.claude-key { display: grid; gap: 8px; padding: 12px 14px; border-radius: 10px; border: 1px dashed var(--rule-strong); background: var(--page); font-size: 0.92rem; color: var(--ink-2); }
+.claude-key[hidden], .claude-link[hidden], .claude-deep[hidden] { display: none; }
+.claude-key p { margin: 0; max-width: 75ch; }
+.claude-key-row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.claude-key-row input[type=password] { flex: 1 1 220px; min-width: 0; font-size: 1rem; padding: 8px 12px; }
+.claude-key-row select { font-size: 1rem; padding: 8px 10px; flex: 0 1 auto; }
+.claude-key-msg { color: var(--dep); font-weight: 700; }
+.claude-answer { display: grid; gap: 8px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--rule-strong); border-left: 5px solid var(--focus); background: var(--page); }
+.claude-answer > * { min-width: 0; }
+.claude-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.claude-status { font-size: 0.9rem; color: var(--muted); flex: 1; }
+.claude-trace { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 0.88rem; color: var(--ink-2); }
+.claude-trace li { display: flex; gap: 8px; align-items: baseline; }
+.claude-trace li::before { content: "\2026"; flex: none; width: 1em; color: var(--muted); }
+.claude-trace li.is-done::before { content: "\2713"; color: var(--focus); font-weight: 700; }
+.claude-trace li.is-error::before { content: "!"; color: var(--dep); font-weight: 700; }
+.claude-trace button { font: inherit; background: none; border: 0; padding: 0; color: inherit; text-align: left; cursor: pointer; text-decoration: underline dotted; }
+.claude-text { font-size: 1.05rem; line-height: 1.55; white-space: pre-wrap; max-width: 75ch; }
+.claude-text .num-ok { text-decoration: underline 2px; text-decoration-color: #2e9d5b; text-underline-offset: 3px; }
+.claude-text mark.num-bad { background: var(--note-bg); color: var(--ink); outline: 2px solid var(--dep); border-radius: 3px; padding: 0 2px; }
+.claude-audit { font-weight: 700; font-size: 0.95rem; }
+.claude-audit.ok { color: #2e9d5b; }
+.claude-audit.warn { color: var(--dep); }
+.claude-foot { font-size: 0.85rem; color: var(--muted); }
+.explore { margin: 0 0 12px; padding: 12px 14px; border-radius: 10px; border: 2px solid var(--focus); background: var(--panel); display: grid; gap: 8px; }
+.explore[hidden] { display: none; }
+.explore-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 1.1rem; }
+.explore > * { min-width: 0; }
+.pick-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 10px; font-size: 0.92rem; }
+.pick-summary[hidden] { display: none; }
+.explore code { display: block; padding: 6px 8px; background: var(--page); border: 1px solid var(--rule); border-radius: 6px; overflow-x: auto; white-space: nowrap; }
+.chart .pick { fill: var(--focus); fill-opacity: 0.16; stroke: var(--focus); stroke-width: 1.5; }
+.chart-hit { touch-action: pan-y; }
+.take.flip .chip { animation: flip 0.35s ease; }
+@keyframes flip { from { transform: scale(0.6); opacity: 0.2; } to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .take.flip .chip { animation: none; } }
+.take.is-active { box-shadow: 0 0 0 3px var(--focus); }
+.viewer { position: relative; width: 100%; aspect-ratio: 1 / 1; }
+.viewer-fallback { position: absolute; inset: 0; display: grid; place-items: center; padding: 12px; text-align: center; font-size: 0.85rem; color: var(--muted); }
+.take figcaption { padding: 8px 10px 10px; border-top: 1px solid var(--rule); display: grid; gap: 4px; }
+.take-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.chip { font-size: 0.85rem; padding: 1px 9px; border-radius: 999px; background: var(--chip-no); color: var(--ink); white-space: nowrap; }
+.chip.yes { background: var(--chip-yes); }
+.take-detail { font-size: 0.85rem; color: var(--muted); }
+
+/* consensus + chart */
+.stage-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 36px; margin-top: 42px; align-items: start; }
+.consensus .viewer { aspect-ratio: auto; height: 430px; background: var(--stage); border-radius: 8px; border: 1px solid var(--rule); }
+.section-head { display: grid; gap: 5px; margin-bottom: 14px; }
+.section-head .muted { max-width: 58ch; }
+.legend { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.9rem; color: var(--ink-2); }
+.legend li { display: flex; align-items: center; gap: 7px; }
+.swatch { width: 14px; height: 14px; border-radius: 3px; flex: none; }
+.chart-wrap { position: relative; }
+.chart { width: 100%; height: auto; display: block; overflow: visible; }
+.chart text { fill: var(--muted); font-size: 12px; font-family: inherit; }
+.chart .grid { stroke: var(--rule); stroke-width: 1; shape-rendering: crispEdges; }
+.chart .axis { stroke: var(--rule-strong); stroke-width: 1; shape-rendering: crispEdges; }
+.chart .band { fill: var(--band); }
+.chart .mean { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart .runline { fill: none; stroke: var(--ink-2); stroke-opacity: 0.55; stroke-width: 1.2; stroke-linejoin: round; display: none; }
+body[data-audience="expert"] .chart .runline { display: inline; }
+.chart .runline.is-active { display: inline; stroke: var(--focus); stroke-opacity: 1; stroke-width: 2.2; }
+.chart .runline.is-a { display: inline; stroke: var(--focus); stroke-opacity: 1; stroke-width: 2.4; }
+.chart .runline.is-b { display: inline; stroke: var(--dep); stroke-opacity: 1; stroke-width: 2.4; stroke-dasharray: 5 3; }
+:root { --aa-hydrophobic: #E69F00; --aa-aromatic: #CC79A7; --aa-polar: #009E73; --aa-positive: #0072B2; --aa-negative: #D55E00; --aa-gp: #56B4E9; }
+.chart-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 8px; }
+.seg { display: inline-flex; border: 1px solid var(--rule-strong); border-radius: 999px; padding: 3px; margin: 0; background: var(--panel); }
+.seg legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.seg label { position: relative; cursor: pointer; }
+.seg input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.seg span { display: block; padding: 4px 12px; border-radius: 999px; font-size: 0.88rem; color: var(--ink-2); }
+.seg input:checked + span { background: var(--ink); color: var(--page); font-weight: 700; }
+.seg input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 1px; }
+.seg input:disabled + span { opacity: 0.45; cursor: not-allowed; }
+#chart-scale[aria-pressed="true"] { background: var(--ink); color: var(--page); border-color: var(--ink); }
+.pair-grid { display: inline-grid; gap: 4px; margin: 6px 0 4px; font-size: 0.85rem; }
+.pair-grid .ph { color: var(--ink-2); font-weight: 700; text-align: center; align-self: center; }
+.pair-grid button { font: inherit; font-size: 0.85rem; min-width: 52px; height: 40px; border-radius: 6px; border: 1px solid var(--rule); cursor: pointer; color: var(--ink); }
+.pair-grid button[aria-pressed="true"] { outline: 3px solid var(--focus); outline-offset: 1px; }
+.pair-grid .self { min-width: 52px; height: 40px; border-radius: 6px; background: var(--rule); }
+.pair-detail { display: grid; gap: 6px; padding: 10px 12px; border-radius: 8px; background: var(--panel); border: 1px solid var(--rule); margin-top: 6px; }
+.pair-detail[hidden] { display: none; }
+.pair-key { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.88rem; color: var(--ink-2); }
+.pair-key i { display: inline-block; width: 18px; height: 0; border-top: 3px solid var(--focus); vertical-align: middle; margin-right: 5px; }
+.pair-key i.b { border-top: 3px dashed var(--dep); }
+.aa-bars { display: grid; gap: 5px; margin-top: 6px; }
+.aa-row { display: grid; grid-template-columns: 9.5em minmax(0, 1fr) 6.5em; gap: 8px; align-items: center; font-size: 0.9rem; }
+.aa-row .aa-bar { height: 12px; border-radius: 3px; background: var(--rule); overflow: hidden; }
+.aa-row .aa-bar i { display: block; height: 100%; }
+.aa-row .aa-val { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) { .aa-row { grid-template-columns: 7.5em minmax(0, 1fr) 5.5em; } .pair-grid button, .pair-grid .self { min-width: 40px; } }
+.chart .threshold { stroke: var(--focus); stroke-width: 1; display: none; }
+body[data-audience="expert"] .chart .threshold.is-active { display: inline; }
+.chart .region { fill: var(--region); }
+.chart .ends { fill: var(--unscored); opacity: 0.55; }
+.chart .crosshair { stroke: var(--ink); stroke-width: 1; shape-rendering: crispEdges; }
+.chart .cell { shape-rendering: crispEdges; }
+.chart-hit { cursor: crosshair; }
+.chart-wrap:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; border-radius: 4px; }
+.tooltip { position: absolute; pointer-events: none; min-width: 160px; max-width: 240px; background: var(--panel); border: 1px solid var(--rule-strong); border-radius: 8px; padding: 8px 10px; font-size: 0.85rem; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12); display: none; z-index: 2; }
+.tooltip strong { font-size: 1rem; }
+.tooltip .row { display: flex; justify-content: space-between; gap: 12px; color: var(--ink-2); }
+.hint { font-size: 0.88rem; color: var(--muted); margin-top: 8px; }
+
+/* lower sections */
+.lower { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--rule); }
+.stack > section + section { margin-top: 10px; }
+.stack { display: grid; gap: 18px; align-content: start; }
+.curve { display: grid; gap: 8px; margin-top: 4px; }
+.curve-row { display: grid; grid-template-columns: 4.5em minmax(0, 1fr) 7.5em; align-items: center; gap: 10px; font-size: 0.92rem; }
+.bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; background: var(--rule); gap: 2px; }
+.bar i { display: block; height: 100%; }
+.seg-same { background: var(--ink-2); }
+.seg-opp { background: var(--dep); }
+.seg-tie { background: var(--none); }
+.explain h3 { margin-bottom: 4px; }
+.explain p + h3 { margin-top: 14px; }
+.cite { font-size: 0.85rem; color: var(--muted); }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { color: var(--ink-2); font-weight: 700; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.table-scroll { overflow-x: auto; }
+details { border-top: 1px solid var(--rule); padding-top: 10px; }
+summary { cursor: pointer; color: var(--ink-2); }
+pre { background: var(--page); border: 1px solid var(--rule); border-radius: 8px; padding: 12px; overflow-x: auto; max-height: 420px; white-space: pre; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { background: var(--panel); border: 1px solid var(--rule-strong); border-radius: 8px; padding: 6px 12px; cursor: pointer; font-size: 0.9rem; }
+.kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; font-size: 0.92rem; }
+.kv dt { color: var(--ink-2); }
+.kv dd { margin: 0; overflow-wrap: anywhere; }
+footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.85rem; display: grid; gap: 6px; }
+
+@media (max-width: 900px) {
+  .stage-grid, .lower { grid-template-columns: minmax(0, 1fr); }
+  .consensus .viewer { height: 340px; }
+}
+@media (max-width: 900px) { .howto { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) {
+  .page { padding: 14px 16px 40px; }
+  .takes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .brand span { display: none; }
+  .audience { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; border-radius: 14px; order: 3; }
+  .audience span { padding: 6px 4px; font-size: 0.82rem; line-height: 1.25; text-align: center; border-radius: 10px; white-space: normal; }
+  .curve-row { grid-template-columns: 4em minmax(0, 1fr); }
+  .take figcaption { padding: 6px 7px 8px; }
+  .take-title { flex-direction: column; align-items: flex-start; gap: 3px; }
+  .chip { font-size: 0.78rem; padding: 0 7px; }
+  .take-detail { font-size: 0.78rem; }
+  .curve-row .curve-value { grid-column: 2; }
+  .ask { padding: 12px; }
+  .ask-suggest .ask-chip:nth-child(n+5) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+@media print { .topbar .audience, .theme-toggle { display: none; } }
+</style>
+</head>
+<body data-audience="new">
+<div class="page">
+  <header class="topbar">
+    <div class="brand"><strong>Concordance</strong><span>Replicate-aware flexibility, built on MDAnalysis</span></div>
+    <fieldset class="audience" id="audience">
+      <legend>Show this page for</legend>
+      <label><input type="radio" name="audience" value="new"><span>I'm new to simulations</span></label>
+      <label><input type="radio" name="audience" value="expert"><span>I run simulations</span></label>
+      <label><input type="radio" name="audience" value="check"><span>I'm checking the work</span></label>
+    </fieldset>
+    <div class="top-actions">
+      <button class="theme-toggle" id="new-files" type="button" hidden>Other files</button>
+      <button class="theme-toggle" id="theme-toggle" type="button">Dark mode</button>
+    </div>
+  </header>
+
+  <section class="drop-page" id="drop" hidden>
+    <h1>Do your simulation runs agree?</h1>
+    <p class="context">Add how much each residue moved in each of your repeat runs. You'll see which parts move a lot in every run, which only in some, and what one run alone would have told you. <strong>Your files stay on this computer: nothing is uploaded.</strong></p>
+    <label class="dropzone" id="dropzone" for="drop-input">
+      <input type="file" id="drop-input" class="sr-only" multiple accept=".xvg,.dat,.csv,.tsv,.txt,.agr,.pdb,text/plain,text/csv">
+      <strong>Drop your files here, or click to choose them</strong>
+      <span>One file per run (GROMACS <code>gmx rmsf</code> .xvg, AMBER <code>cpptraj</code> .dat, CSV or text), or one table with a column per run. Add a .pdb of the protein to see it in 3D (optional).</span>
+    </label>
+    <ul class="drop-files" id="drop-files" aria-live="polite"></ul>
+    <div class="drop-options">
+      <label>Name <input class="ask-input" id="drop-name" type="text" maxlength="60" placeholder="e.g. my protein"></label>
+      <label>Units <select class="ask-input" id="drop-units">
+        <option value="">Read from the files (nm if they don't say)</option>
+        <option value="nm">nm (GROMACS)</option>
+        <option value="A">Ångström (AMBER cpptraj)</option>
+      </select></label>
+      <label>Measure against residues <span class="muted">(optional)</span> <input class="ask-input" id="drop-reference" type="text" maxlength="20" placeholder="e.g. 1-60, the folded part"></label>
+    </div>
+    <p class="note warn" id="drop-error" role="alert" hidden></p>
+    <div class="actions">
+      <button class="btn-ask" type="button" id="drop-go" disabled>Show me</button>
+      <button class="btn" type="button" id="drop-example">Try it with example data</button>
+      <button class="btn" type="button" id="drop-clear">Start again</button>
+    </div>
+    <details class="drop-help">
+      <summary>Which files work, and how do I make them?</summary>
+      <ul class="prose">
+        <li><b>GROMACS:</b> for each run, <code>gmx rmsf -s topol.tpr -f run1.xtc -res -o run1_rmsf.xvg</code> (choose the C-alpha group). Then add all the .xvg files.</li>
+        <li><b>AMBER:</b> in cpptraj, <code>atomicfluct out run1.dat @CA byres</code> for each run. Then add all the .dat files.</li>
+        <li><b>A spreadsheet:</b> residue numbers in the first column and one column per run, saved as CSV. A first row of column names is fine, and so is a column of residue names.</li>
+        <li><b>Anything else:</b> a text file with residue numbers and values in columns. Lines starting with # or @ are ignored.</li>
+        <li><b>Units</b> only change the numbers shown. Whether a residue “moves a lot” is judged against its own run's typical value, so the answers are the same in nm or Ångström.</li>
+        <li>Every run should cover the same residues, one chain at a time. Three or more runs are best; five is better.</li>
+      </ul>
+    </details>
+    <p class="hint">Same rules as the Concordance command line, which can also start from the simulations themselves. The page gives you the command that reproduces its answer.</p>
+  </section>
+
+  <main id="report-main">
+    <p class="note" id="synthetic-note" hidden></p>
+    <p class="note warn" id="geometry-note" role="alert" hidden></p>
+    <div class="note warn" id="disorder-note" hidden></div>
+
+    <section class="hero" aria-labelledby="question">
+      <h1 id="question"></h1>
+      <p class="context" id="context"></p>
+      <p class="verdict" id="verdict"></p>
+      <p class="risk" id="risk"></p>
+      <div data-for="new">
+        <ol class="howto" aria-label="How to read this page">
+          <li><b>A simulation is a film</b>A computer follows every atom of a protein over time, like a film of it moving.</li>
+          <li><b id="howto-runs">We filmed it five times</b>Each film comes out a bit differently, so the same question is asked of every film.</li>
+          <li><b>Colours</b><span class="swatch" style="background: var(--flex)"></span>blue: moved a lot. <span class="swatch" style="background: var(--dep)"></span>orange: the films disagree.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="ask" id="ask" aria-labelledby="ask-title">
+      <h2 id="ask-title">Ask about this protein in your own words</h2>
+      <form class="ask-form" id="ask-form" autocomplete="off">
+        <label class="sr-only" for="ask-input">Your question</label>
+        <input class="ask-input" id="ask-input" type="text" enterkeyhint="send" maxlength="200" placeholder="For example: which parts move a lot?">
+        <button class="btn-ask" type="submit">Ask</button>
+      </form>
+      <div class="claude-row" id="claude-row" hidden>
+        <button class="btn-claude" type="button" id="ask-claude"><span aria-hidden="true">&#10022;</span> Ask Claude</button>
+        <label class="claude-deep"><input type="checkbox" id="claude-deep"> Think harder (slower)</label>
+        <span class="claude-blurb">Claude reads the numbers through the same engine, and this page checks every number it writes.</span>
+        <button class="claude-link" type="button" id="claude-key-change" hidden>Change key or model</button>
+      </div>
+      <form class="claude-key" id="claude-key" autocomplete="off" hidden>
+        <p><strong>Ask Claude with your own API key.</strong> Outside Claude, this page talks to Claude straight from your browser. Your key stays in this tab and is sent only to api.anthropic.com, together with your question and the engine's answers (never your files). <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">Get an API key</a>.</p>
+        <div class="claude-key-row">
+          <label class="sr-only" for="claude-key-input">Anthropic API key</label>
+          <input class="ask-input" id="claude-key-input" type="password" spellcheck="false" placeholder="sk-ant-...">
+          <label class="sr-only" for="claude-model">Model</label>
+          <select class="ask-input" id="claude-model">
+            <option value="claude-sonnet-5-5">Claude Sonnet 5.5</option>
+            <option value="claude-opus-5-5">Claude Opus 5.5</option>
+            <option value="claude-haiku-5-5">Claude Haiku 5.5</option>
+          </select>
+          <button class="btn-ask" type="submit">Use this key</button>
+        </div>
+        <div class="claude-key-row">
+          <label class="claude-deep"><input type="checkbox" id="claude-remember"> Remember it until I close this tab</label>
+          <button class="claude-link" type="button" id="claude-key-forget">Forget the key</button>
+          <span class="claude-key-msg" id="claude-key-msg" role="status"></span>
+        </div>
+      </form>
+      <div class="ask-suggest" id="ask-suggest" role="group" aria-label="Example questions"></div>
+      <div class="ask-answer" id="ask-answer" aria-live="polite" hidden></div>
+      <div class="claude-answer" id="claude-answer" hidden>
+        <div class="claude-head"><strong><span aria-hidden="true">&#10022;</span> Claude</strong><span class="claude-status" id="claude-status" role="status"></span><button class="btn" type="button" id="claude-stop" hidden>Stop</button></div>
+        <p class="ask-you" id="claude-question"></p>
+        <ol class="claude-trace" id="claude-trace" aria-label="What Claude asked the engine"></ol>
+        <div class="claude-text" id="claude-text" aria-live="polite"></div>
+        <p class="claude-audit" id="claude-audit" hidden></p>
+        <p class="claude-foot" id="claude-foot" hidden>Claude saw your question and the engine's answers listed above, not your files. Numbers underlined in green match what the engine returned.</p>
+      </div>
+      <p class="hint" id="ask-hint">Answered in your browser from this page's numbers. Nothing is sent anywhere, and it tells you when it doesn't understand.</p>
+    </section>
+
+    <section aria-labelledby="takes-title">
+      <div class="takes-head">
+        <h2 id="takes-title">The same protein, simulated <span id="n-runs"></span> times</h2>
+        <p class="muted" id="takes-hint"></p>
+      </div>
+      <div class="explore" id="explore" role="status" aria-live="polite" hidden>
+        <div class="explore-head"><span class="pill" id="explore-pill"></span><span id="explore-text"></span></div>
+        <p class="risk" id="explore-risk"></p>
+        <div data-for="expert check"><code id="explore-cmd"></code></div>
+        <div class="actions">
+          <button class="btn" type="button" id="explore-copy">Copy the command that gives this a receipt</button>
+          <button class="btn" type="button" id="explore-reset">Back to the original question</button>
+        </div>
+      </div>
+      <div class="strip"><ol class="takes" id="takes"></ol></div>
+    </section>
+
+    <div class="stage-grid">
+      <section class="consensus" aria-labelledby="consensus-title">
+        <div class="section-head">
+          <h2 id="consensus-title">All runs together</h2>
+          <p class="muted" id="consensus-sub"></p>
+        </div>
+        <div class="viewer" id="consensus-viewer" data-viewer="consensus" role="img"></div>
+        <ul class="legend" id="legend"></ul>
+      </section>
+
+      <section aria-labelledby="chart-title">
+        <div class="section-head">
+          <h2 id="chart-title">How much each residue moves</h2>
+          <p class="muted" data-for="new">The line is the average over the runs; the shaded band spans the lowest to highest run. Below it, one coloured cell per residue.</p>
+          <p class="muted" data-for="expert check" id="chart-sub-expert"></p>
+        </div>
+        <div class="chart-controls">
+          <fieldset class="seg" id="colour-by"><legend>Colour the strip under the chart by</legend>
+            <label><input type="radio" name="colour-by" value="agree" checked><span>How many runs agree</span></label>
+            <label><input type="radio" name="colour-by" value="aa"><span>Amino-acid type</span></label>
+          </fieldset>
+          <button class="btn" type="button" id="chart-scale" aria-pressed="false">Log scale</button>
+        </div>
+        <div class="chart-wrap" id="chart-wrap" tabindex="0" role="group" aria-label="Flexibility per residue. Use the left and right arrow keys to step through residues."></div>
+        <ul class="legend" id="chart-legend" hidden></ul>
+        <p class="hint" id="scale-note" hidden></p>
+        <p class="pick-summary" id="pick-summary" aria-hidden="true" hidden></p>
+        <p class="hint"><strong>Drag across the chart to ask about any stretch of residues</strong>: the five runs answer straight away. Point, or use the arrow keys, to step through residues (hold Shift to select).</p>
+        <p class="sr-only" aria-live="polite" id="live"></p>
+      </section>
+    </div>
+
+    <div class="lower">
+      <div class="stack">
+        <section id="curve-section" aria-labelledby="curve-title">
+          <h2 id="curve-title">If you had run fewer simulations</h2>
+          <div data-for="new"><div id="curve-plain" class="explain"></div></div>
+          <div data-for="expert check"><div class="curve" id="curve-bars"></div><ul class="legend" id="curve-legend"></ul></div>
+        </section>
+        <section aria-labelledby="runs-alone-title" id="runs-alone">
+          <h2 id="runs-alone-title">What each run would have told you alone</h2>
+          <div class="table-scroll"><table id="runs-table"></table></div>
+        </section>
+        <section aria-labelledby="compare-title" id="compare-section">
+          <h2 id="compare-title">Compare the runs</h2>
+          <p class="muted">Each square shows how often two runs agree on whether a residue moves a lot. Pick one to see where they differ.</p>
+          <div class="pair-grid" id="pair-grid" role="group" aria-label="Agreement between each pair of runs"></div>
+          <div class="pair-detail" id="pair-detail" aria-live="polite" hidden></div>
+          <details data-for="expert check"><summary>Where each run's numbers came from</summary><div class="table-scroll"><table id="sources-table"></table></div></details>
+        </section>
+        <section aria-labelledby="aa-title" id="aa-section" hidden>
+          <h2 id="aa-title">Movement by amino-acid type</h2>
+          <p class="muted">Average movement over the runs for each kind of amino acid in this protein. Where a residue sits matters more than what it is (a glycine in a loop moves more than one in a helix), and types with only a few residues are noisy.</p>
+          <div class="aa-bars" id="aa-bars"></div>
+        </section>
+      </div>
+
+      <div class="stack">
+        <div data-for="new">
+          <section class="explain prose" aria-label="Plain-language explanation">
+            <h3>What you are looking at</h3>
+            <p id="explain-what"></p>
+            <h3>Why run a simulation more than once?</h3>
+            <p>A simulation is a little film of how a protein moves, and every film comes out a bit differently. Guidelines for simulation studies ask for at least three independent runs and for those runs to be compared with each other. Concordance does that comparison for you, residue by residue, and shows its working.</p>
+            <h3>What this does not tell you</h3>
+            <p>Agreement between runs is not proof that the answer is right: runs that start from the same structure can agree and still all be wrong. Disagreement, though, is a clear sign that a single run is not enough to support a claim.</p>
+            <p class="cite">Grossfield et al., <em>LiveCoMS</em> 1, 5067 (2018); <em>Communications Biology</em> 6, 268 (2023) reporting checklist; Knapp, Ospina &amp; Deane, <em>JCTC</em> 14, 6127 (2018).</p>
+          </section>
+        </div>
+
+        <div data-for="expert">
+          <section class="stack" aria-label="Method and numbers">
+            <h2>Method</h2>
+            <dl class="kv" id="method-list"></dl>
+            <details>
+              <summary>Equivalent MDAnalysis code for one run</summary>
+              <pre id="mda-code"></pre>
+            </details>
+            <details>
+              <summary>Every residue as a table</summary>
+              <div class="actions" style="margin: 10px 0"><button class="btn" type="button" id="csv-button">Download as CSV</button></div>
+              <div class="table-scroll"><table id="residue-table"></table></div>
+            </details>
+          </section>
+        </div>
+
+        <div data-for="check">
+          <section class="stack" aria-label="Evidence passport">
+            <h2>Evidence passport</h2>
+            <p class="prose muted">Everything needed to check or replay this answer. The passport id is a fingerprint of the question, the data, the method and the result: the same inputs always give the same id.</p>
+            <dl class="kv" id="passport-list"></dl>
+            <div class="actions">
+              <button class="btn" type="button" id="copy-replay">Copy replay command</button>
+              <button class="btn" type="button" id="copy-passport">Copy passport JSON</button>
+            </div>
+            <h3>Limitations</h3>
+            <ul id="limitations" class="prose"></ul>
+            <details>
+              <summary>Full passport</summary>
+              <pre id="passport-json"></pre>
+            </details>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p id="footer-made"></p>
+    <p id="footer-engine">Flexibility is computed with MDAnalysis (Michaud-Agrawal et al., <em>J. Comput. Chem.</em> 2011; Gowers et al., <em>Proc. SciPy</em> 2016), using its documented RMSF recipe, and checked against an independent NumPy implementation.</p>
+    <p id="footer-data"></p>
+    <p>3D views: 3Dmol.js (BSD-3-Clause). Typeface: Atkinson Hyperlegible by the Braille Institute (SIL Open Font License 1.1).</p>
+  </footer>
+</div>
+
+<script type="application/json" id="concordance-data">__CONCORDANCE_DATA__</script>
+<script type="application/json" id="concordance-example">__CONCORDANCE_EXAMPLE__</script>
+<script>__THREEDMOL__</script>
+<script>__CONCORDANCE_LOGIC__</script>
+<script>
+(function () {
+  "use strict";
+  var DATA = JSON.parse(document.getElementById("concordance-data").textContent);
+  if (DATA) bootReport(DATA); else setupDrop();
+
+  // ------------------------------------------------------------ the no-install page: build a report from files in the browser
+  function setupDrop() {
+    var $ = function (id) { return document.getElementById(id); };
+    var picked = [];  // {file, text, sha256, kind: "rmsf"|"structure", info, error}
+    document.body.classList.add("dropping");
+    $("report-main").hidden = true;
+    $("drop").hidden = false;
+    document.title = "Do your simulation runs agree?";
+    $("footer-engine").textContent = "Uses the same rules as the Concordance command line, which builds on MDAnalysis (Michaud-Agrawal et al., J. Comput. Chem. 2011; Gowers et al., Proc. SciPy 2016).";
+    var version = (document.querySelector('meta[name="generator"]').content || "").replace("Concordance ", "");
+    function hex(buffer) { return Array.prototype.map.call(new Uint8Array(buffer), function (b) { return ("0" + b.toString(16)).slice(-2); }).join(""); }
+    function sha256(buffer) {
+      try { if (window.crypto && crypto.subtle) return crypto.subtle.digest("SHA-256", buffer).then(hex).catch(function () { return "not available in this browser"; }); } catch (e) { /* fall through */ }
+      return Promise.resolve("not available in this browser");
+    }
+    function describe(item) {
+      if (item.kind === "structure") {
+        var pdb = ConcordanceLogic.parsePdbResidues(item.text);
+        return Object.keys(pdb.byNumber).length ? "structure for 3D, " + Object.keys(pdb.byNumber).length + " residues" : null;
+      }
+      var t = ConcordanceLogic.parseRmsfText(item.text, item.file);
+      var first = t.numbers[0], last = t.numbers[t.numbers.length - 1];
+      return t.numbers.length + " residues (" + first + "\u2013" + last + "), " + (t.columns.length === 1 ? "1 run" : t.columns.length + " runs (" + t.columns.map(function (c) { return c.name; }).join(", ") + ")") +
+        (t.unit ? ", " + (t.unit === "A" ? "\u00e5ngstr\u00f6m" : "nm") : "");
+    }
+    function render() {
+      var list = $("drop-files");
+      while (list.firstChild) list.removeChild(list.firstChild);
+      picked.forEach(function (item, k) {
+        var li = document.createElement("li");
+        if (item.error) li.className = "bad";
+        var name = document.createElement("strong"); name.textContent = item.file; li.appendChild(name);
+        var meta = document.createElement("span"); meta.className = "meta"; meta.textContent = item.error || item.info; li.appendChild(meta);
+        var remove = document.createElement("button"); remove.className = "ask-chip"; remove.type = "button"; remove.textContent = "Remove";
+        remove.addEventListener("click", function () { picked.splice(k, 1); render(); });
+        li.appendChild(remove);
+        list.appendChild(li);
+      });
+      var good = picked.filter(function (i) { return !i.error && i.kind === "rmsf"; });
+      $("drop-go").disabled = !good.length;
+      $("drop-error").hidden = true;
+    }
+    function addFiles(fileList) {
+      var files = Array.prototype.slice.call(fileList || []);
+      Promise.all(files.map(function (f) {
+        return f.arrayBuffer().then(function (buffer) {
+          return sha256(buffer).then(function (digest) {
+            var text = new TextDecoder("utf-8").decode(buffer);
+            var item = { file: f.name, text: text, sha256: digest, kind: /\.pdb$/i.test(f.name) || /^(ATOM  |HETATM|HEADER|CRYST1)/m.test(text.slice(0, 2000)) && !/^\s*[#@]/.test(text) ? "structure" : "rmsf" };
+            try { item.info = describe(item); if (!item.info) item.error = "No protein C-alpha atoms found in this structure file."; } catch (e) { item.error = e.message; }
+            return item;
+          });
+        });
+      })).then(function (items) {
+        items.forEach(function (item) {
+          picked = picked.filter(function (old) { return old.file !== item.file; });
+          if (item.kind === "structure") picked = picked.filter(function (old) { return old.kind !== "structure"; });
+          picked.push(item);
+        });
+        picked.sort(function (a, b) { return (a.kind === "structure") - (b.kind === "structure") || a.file.localeCompare(b.file, undefined, { numeric: true }); });
+        render();
+      });
+    }
+    var exampleData = null, lastExample = false, pristine = $("report-main").innerHTML;
+    function parseReference(text) {
+      var m = /^\s*(-?\d+)\s*(?:-|–|:|to|\.\.)\s*(-?\d+)\s*$/.exec(text || "");
+      if (!text || !text.trim()) return null;
+      if (!m) throw new Error("Write the reference residues like 1-60.");
+      var a = Number(m[1]), b = Number(m[2]);
+      return a <= b ? [a, b] : [b, a];
+    }
+    window.__concordanceRebuild = function (reference) {
+      $("drop-reference").value = reference ? reference[0] + "-" + reference[1] : "";
+      $("report-main").innerHTML = pristine;
+      go(lastExample);
+    };
+    function go(example) {
+      lastExample = example;
+      var rmsf = picked.filter(function (i) { return !i.error && i.kind === "rmsf"; });
+      var structure = picked.filter(function (i) { return !i.error && i.kind === "structure"; })[0] || null;
+      try {
+        var D = ConcordanceLogic.buildData({
+          files: rmsf, structure: structure, name: $("drop-name").value.trim() || (example ? (exampleData && exampleData.name) || "example (synthetic)" : ""),
+          units: $("drop-units").value || null, synthetic: !!example, version: version, reference: parseReference($("drop-reference").value),
+          rule: { rule: "mad", k: 3, min_ratio: 1.5, top_fraction: 0.15, trim_termini: 3 }, consistency: 0.8, min_fraction: 0.5
+        });
+        if (example && exampleData && exampleData.note) D.synthetic_note = exampleData.note;
+        var fingerprint = JSON.stringify({ files: D.passport.source.files, rule: D.method, flags: D.flags });
+        sha256(new TextEncoder().encode(fingerprint)).then(function (digest) {
+          D.passport.passport_id = /^[0-9a-f]{64}$/.test(digest) ? digest.slice(0, 12) : "made in the browser";
+          $("drop").hidden = true;
+          $("report-main").hidden = false;
+          document.body.classList.remove("dropping");
+          $("new-files").hidden = false;
+          if (!window.__concordanceBooted) $("new-files").addEventListener("click", function () { location.reload(); });
+          bootReport(D);
+          window.scrollTo(0, 0);
+        });
+      } catch (e) {
+        $("drop-error").textContent = e.message;
+        $("drop-error").hidden = false;
+      }
+    }
+    var zone = $("dropzone");
+    ["dragenter", "dragover"].forEach(function (type) { zone.addEventListener(type, function (ev) { ev.preventDefault(); zone.classList.add("is-over"); }); });
+    ["dragleave", "drop"].forEach(function (type) { zone.addEventListener(type, function (ev) { ev.preventDefault(); zone.classList.remove("is-over"); }); });
+    zone.addEventListener("drop", function (ev) { addFiles(ev.dataTransfer && ev.dataTransfer.files); });
+    document.addEventListener("dragover", function (ev) { ev.preventDefault(); });
+    document.addEventListener("drop", function (ev) { ev.preventDefault(); });
+    $("drop-input").addEventListener("change", function () { addFiles(this.files); this.value = ""; });
+    $("drop-go").addEventListener("click", function () { go(false); });
+    $("drop-clear").addEventListener("click", function () { picked = []; render(); });
+    var example = JSON.parse($("concordance-example").textContent || "null");
+    exampleData = example;
+    if (!example) $("drop-example").hidden = true;
+    $("drop-example").addEventListener("click", function () {
+      picked = example.files.map(function (f) { return { file: f.file, text: f.text, sha256: "example", kind: "rmsf", info: describe({ file: f.file, text: f.text, kind: "rmsf" }) }; });
+      picked.push({ file: example.structure.file, text: example.structure.text, sha256: "example", kind: "structure", info: describe({ file: example.structure.file, text: example.structure.text, kind: "structure" }) });
+      render();
+      go(true);
+    });
+    window.__concordanceDrop = { addTexts: function (items) { picked = []; items.forEach(function (it) { var item = { file: it.file, text: it.text, sha256: "test", kind: it.kind || "rmsf" }; try { item.info = describe(item); } catch (e) { item.error = e.message; } picked.push(item); }); render(); }, go: go };
+  }
+
+  function bootReport(D) {
+  var L = ConcordanceLogic.create(D);
+  var N = D.n, NEED = D.need, FEW = N - NEED;
+  var R = D.residues.length;
+  var store = {
+    get: function (k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { window.localStorage.setItem(k, v); } catch (e) { /* storage unavailable */ } }
+  };
+  function $(id) { return document.getElementById(id); }
+  function h(tag, attrs) {
+    var el = document.createElement(tag);
+    attrs = attrs || {};
+    Object.keys(attrs).forEach(function (k) {
+      var v = attrs[k];
+      if (v === null || v === undefined || v === false) return;
+      if (k === "text") el.textContent = v;
+      else if (k === "class") el.className = v;
+      else el.setAttribute(k, v === true ? "" : v);
+    });
+    for (var i = 2; i < arguments.length; i++) {
+      var kid = arguments[i];
+      if (kid === null || kid === undefined || kid === false) continue;
+      el.appendChild(kid instanceof Node ? kid : document.createTextNode(String(kid)));
+    }
+    return el;
+  }
+  function s(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    Object.keys(attrs || {}).forEach(function (k) { if (attrs[k] !== null && attrs[k] !== undefined) el.setAttribute(k, attrs[k]); });
+    return el;
+  }
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function fixed(x, d) { return Number(x).toFixed(d === undefined ? 3 : d); }
+  function pct(x) { return Math.round(x * 100) + "%"; }
+  function range(a, b) { return a === b ? String(a) : a + "–" + b; }
+
+  // ------------------------------------------------------------ classes
+  var CLASSES = [{ key: "c", v: "--flex", label: "Moves a lot in " + range(NEED, N) + " of " + N + " runs" }];
+  if (NEED - 1 >= FEW + 1) CLASSES.push({ key: "d", v: "--dep", label: "Moves a lot in only " + range(FEW + 1, NEED - 1) + " of " + N + " runs" });
+  if (FEW >= 1) CLASSES.push({ key: "m", v: "--one", label: "Moves a lot in " + range(1, FEW) + " of " + N + " runs" });
+  CLASSES.push({ key: "n", v: "--none", label: "Moves a lot in no run" });
+  CLASSES.push({ key: "u", v: "--unscored", label: "Chain end, not scored" });
+  var CLASS_BY_KEY = {};
+  CLASSES.forEach(function (c) { CLASS_BY_KEY[c.key] = c; });
+  function classColour(i) { return cssVar(CLASS_BY_KEY[D.classes[i]].v); }
+  function runColour(run, i) {
+    if (D.classes[i] === "u") return cssVar("--unscored");
+    return D.flags[run][i] ? cssVar("--flex") : cssVar("--none");
+  }
+
+  // ------------------------------------------------------------ text
+  function verdictName(v) {
+    if (v === "consistent across replicas") return { label: "Consistent across runs", dot: "--flex" };
+    if (v === "replica-dependent") return { label: "Replica-dependent", dot: "--dep" };
+    return { label: "Not seen in most runs", dot: "--none" };
+  }
+  function renderText() {
+    var claim = D.claim;
+    document.title = D.title;
+    $("n-runs").textContent = N === 5 ? "five" : String(N);
+    if (D.synthetic) {
+      $("synthetic-note").hidden = false;
+      $("synthetic-note").textContent = D.synthetic_note || "Synthetic test data: these runs were generated with a known answer built in, to test the tool. They are not a real simulation.";
+    }
+    if (D.disorder) {
+      var dn = $("disorder-note");
+      while (dn.firstChild) dn.removeChild(dn.firstChild);
+      dn.appendChild(h("p", { text: Math.round(D.disorder.share * 100) + "% of residues move far more than the stillest ones, so part of this protein may be disordered. " +
+        "Each run's \u201cmoves a lot\u201d is judged against its own typical residue, and when much of the chain is disordered that baseline is too, so real flexible regions can be missed." }));
+      if (D.disorder.reference) {
+        var refText = D.disorder.reference[0] + "\u2013" + D.disorder.reference[1];
+        if (window.__concordanceRebuild) {
+          var rb = h("button", { "class": "btn", type: "button", text: "Measure against the still part (residues " + refText + ")" });
+          rb.addEventListener("click", function () { window.__concordanceRebuild(D.disorder.reference); });
+          dn.appendChild(h("div", { "class": "actions" }, rb));
+        } else {
+          dn.appendChild(h("p", { text: "To measure against the still part, run the same command again with --reference " + D.disorder.reference[0] + "-" + D.disorder.reference[1] + "." }));
+        }
+      }
+      dn.hidden = false;
+    }
+    if (D.method && D.method.reference_residues) {
+      var rn = $("disorder-note");
+      while (rn.firstChild) rn.removeChild(rn.firstChild);
+      rn.className = "note";
+      rn.appendChild(h("p", { text: "\u201cMoves a lot\u201d is measured against residues " + D.method.reference_residues[0] + "\u2013" + D.method.reference_residues[1] + " in each run (the still part), not the whole chain." }));
+      if (window.__concordanceRebuild) {
+        var undo = h("button", { "class": "btn", type: "button", text: "Measure against the whole chain instead" });
+        undo.addEventListener("click", function () { window.__concordanceRebuild(null); });
+        rn.appendChild(h("div", { "class": "actions" }, undo));
+      }
+      rn.hidden = false;
+    }
+    if (D.geometry && D.geometry.ok === false) {
+      $("geometry-note").hidden = false;
+      $("geometry-note").textContent = "Check the input: neighbouring residues " + D.geometry.where.between + " are " + Math.round(D.geometry.largest_A) +
+        " \u00c5 apart in some frames (normal is about 3.8 \u00c5). " + D.geometry.advice;
+    }
+    $("question").textContent = claim
+      ? "Is " + claim.region[0] + "–" + claim.region[1] + " flexible, and do the runs agree?"
+      : "Which parts move, and do the runs agree?";
+    var where = D.synthetic ? D.name + ", synthetic test data in the mdCATH file layout"
+      : D.kind === "mdcath" ? D.name + ", a protein domain from the mdCATH dataset" : D.name;
+    var gmx = D.condition === "gmx rmsf output";
+    var unitNote = D.units ? " Units: " + (D.units.unit === "A" ? "\u00e5ngstr\u00f6m, shown here in nm" : "nm") + ", " + D.units.source + "." : "";
+    if (D.numbering) unitNote += " Note: " + D.numbering + ".";
+    if (D.skipped_columns && D.skipped_columns.length) unitNote += " Summary columns left out (not runs): " + D.skipped_columns.join(", ") + ".";
+    var frameText = D.kind === "xvg" ? "RMSF read from your files"
+      : D.kind === "mdcath" && !D.synthetic ? D.window.frames_used_per_run + " ns per run analysed" : D.window.frames_used_per_run + " frames per run analysed";
+    if (D.kind === "xvg") where = D.name;
+    if (D.mixed) {
+      $("context").textContent = D.name + ": " + N + " runs from different files, each read by its contents and matched residue by residue. " +
+        D.mixed.sources.map(function (src, k) { return "Run " + (k + 1) + ": " + src + " (" + D.mixed.frames_used[k] + " frames used)."; }).join(" ") +
+        (D.mixed.matching.length ? " " + D.mixed.matching.map(function (m) { return m.charAt(0).toUpperCase() + m.slice(1) + "."; }).join(" ") : "");
+    } else $("context").textContent = D.kind === "xvg" ? D.name + ": " + N + " runs, RMSF read from " + (gmx ? "gmx rmsf output files (one per run)." : "your files.") + unitNote
+      : where + ", " + D.condition + ", " + N + " runs, " + frameText + ".";
+    var verdict = $("verdict");
+    if (claim) {
+      var vn = verdictName(claim.verdict);
+      var dot = h("span", { "class": "dot" });
+      dot.style.background = "var(" + vn.dot + ")";
+      verdict.appendChild(h("span", { "class": "pill" }, dot, vn.label));
+      verdict.appendChild(h("span", { text: claim.replicas_supporting + " of " + N + " runs say yes." }));
+      $("risk").textContent = claim.plain_sentence;
+    } else {
+      var c = D.counts;
+      verdict.appendChild(h("span", { text: c.consistent + (c.consistent === 1 ? " residue moves" : " residues move") + " a lot in at least " + NEED + " of " + N + " runs; " + c.replica_dependent + " more " + (c.replica_dependent === 1 ? "does" : "do") + " so in only some runs." }));
+      var worst = null;
+      D.runs.forEach(function (run) {
+        var sm = D.summaries[run.id];
+        var score = sm.missed_consistent + sm.extra_not_consistent;
+        if (!worst || score > worst.score) worst = { run: run, sm: sm, score: score };
+      });
+      if (worst && worst.score > 0) {
+        $("risk").textContent = worst.sm.missed_consistent === 0
+          ? "Analysed alone, " + worst.run.label.toLowerCase() + " would have flagged " + worst.sm.extra_not_consistent + " extra residues as moving a lot that fewer than " + NEED + " runs agree on."
+          : "Analysed alone, " + worst.run.label.toLowerCase() + " would have missed " + worst.sm.missed_consistent + " of the " + c.consistent +
+          (c.consistent === 1 ? " residue that moves" : " residues that move") + " a lot in at least " + NEED + " runs, and flagged " + worst.sm.extra_not_consistent + " that fewer than " + NEED + " runs agree on.";
+      } else {
+        $("risk").textContent = "Every run, analysed alone, picks out the same flexible residues.";
+      }
+    }
+    $("takes-hint").textContent = "Blue: moved a lot in that run. Drag any view to rotate; they all turn together.";
+    $("consensus-sub").textContent = "Each residue coloured by how many of the " + N + " runs say it moves a lot.";
+    $("chart-sub-expert").textContent = D.kind === "xvg" ? "RMSF (nm) " + (gmx ? "as written by gmx rmsf" : "from your files") + "; thin lines are individual runs, the thick line is the mean." : "C-alpha RMSF (nm) from MDAnalysis, frames " + D.window.frame_range[0] + "–" + (D.window.frame_range[1] - 1) +
+      " of each run; thin lines are individual runs, the thick line is the mean, the band spans min to max.";
+    $("explain-what").textContent = "Each small picture is the same protein, simulated " + (N === 5 ? "five" : N) +
+      " separate times. Blue marks the parts that moved a lot in that run. The large picture puts all runs together: blue parts moved a lot in at least " +
+      NEED + " runs, orange parts in only some of them, so those are the claims to be careful with.";
+    var made = "Made by Concordance " + D.version + " on " + D.created.slice(0, 10) + ". Passport " + D.passport.passport_id + ".";
+    $("footer-made").textContent = made;
+    $("footer-data").textContent = D.kind === "mdcath"
+      ? "Data: mdCATH (Mirarchi, Giorgino & De Fabritiis, Scientific Data 11, 1299, 2024), fetched at run time; no data is redistributed."
+      : D.kind === "xvg" ? "Data: RMSF values from your files; see the passport for file fingerprints."
+      : "Data: trajectory files read by MDAnalysis; see the passport for file fingerprints.";
+    if (D.kind === "xvg") $("footer-engine").textContent = "Flexibility values (RMSF) come from your files. Concordance applies the same rules as its Python engine, which builds on MDAnalysis (Michaud-Agrawal et al., J. Comput. Chem. 2011; Gowers et al., Proc. SciPy 2016).";
+    $("howto-runs").textContent = "We filmed it " + (N === 5 ? "five" : N) + " times";
+  }
+
+  // ------------------------------------------------------------ the five takes
+  var takeNodes = [];
+  var takeParts = {};
+  function renderTakes() {
+    var list = $("takes");
+    list.style.setProperty("--n", Math.min(N, 6));
+    D.runs.forEach(function (run, k) {
+      var sm = D.summaries[run.id];
+      var chip = null, detail;
+      if (D.claim) {
+        var yes = D.claim.answers[run.id];
+        chip = h("span", { "class": "chip" + (yes ? " yes" : ""), text: yes ? "says yes" : "says no" });
+        var pr = D.claim.per_replica[run.id];
+        detail = pr.flexible_residues_in_region + " of " + pr.region_residues_scored + " residues in the region move a lot";
+      } else {
+        chip = h("span", { "class": "chip", text: sm.flexible_residues + " flexible" });
+        detail = "misses " + sm.missed_consistent + ", adds " + sm.extra_not_consistent;
+      }
+      var viewer = h("div", { "class": "viewer", "data-viewer": "run", "data-run": run.id, role: "img", "aria-label": run.label + " of " + N + ": the protein coloured by which residues moved a lot in this run" });
+      var item = h("li", { "class": "take", tabindex: "0", "data-run": run.id },
+        viewer,
+        h("figcaption", {},
+          h("div", { "class": "take-title" }, h("strong", { text: run.label }), chip),
+          h("span", { "class": "take-detail", text: detail })));
+      item.addEventListener("mouseenter", function () { setActiveRun(run.id); });
+      item.addEventListener("mouseleave", function () { setActiveRun(null); });
+      item.addEventListener("focus", function () { setActiveRun(run.id); });
+      item.addEventListener("blur", function () { setActiveRun(null); });
+      list.appendChild(item);
+      takeNodes.push(item);
+      takeParts[run.id] = { item: item, chip: chip, detail: item.querySelector(".take-detail"), chipText: chip.textContent, chipClass: chip.className, detailText: detail };
+    });
+  }
+
+  function renderLegend() {
+    var legend = $("legend");
+    CLASSES.forEach(function (c) {
+      var sw = h("span", { "class": "swatch" });
+      sw.style.background = "var(" + c.v + ")";
+      legend.appendChild(h("li", {}, sw, c.label));
+    });
+    $("consensus-viewer").setAttribute("aria-label", "The protein coloured by how many runs say each residue moves a lot.");
+  }
+
+  // ------------------------------------------------------------ chart
+  var chart = {};
+  function niceStep(max, count) {
+    var raw = max / count, mag = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / mag;
+    return (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * mag;
+  }
+  function renderChart() {
+    var W = 760, L = 50, Rm = 10, T = 10, PH = 230, TRACK = 16;
+    var PW = W - L - Rm, H = T + PH + 22 + TRACK + 6;
+    var runIds = D.runs.map(function (r) { return r.id; });
+    var maxScored = 0;
+    for (var i = 0; i < R; i++) {
+      if (D.classes[i] === "u") continue;
+      runIds.forEach(function (id) { maxScored = Math.max(maxScored, D.rmsf[id][i]); });
+    }
+    var step = niceStep(maxScored * 1.1 || 0.1, 4), ymax = Math.ceil((maxScored * 1.1) / step) * step;
+    var minPos = Infinity;
+    runIds.forEach(function (id) { D.rmsf[id].forEach(function (v) { if (v > 0) minPos = Math.min(minPos, v); }); });
+    var logLo = Math.pow(10, Math.floor(Math.log10(minPos === Infinity ? 0.01 : minPos))), logHi = ymax;
+    function x(i) { return L + (i + 0.5) * (PW / R); }
+    function y(v) {
+      if (chartOpts.log) return T + PH - (Math.log10(Math.max(Math.min(v, logHi), logLo)) - Math.log10(logLo)) / (Math.log10(logHi) - Math.log10(logLo)) * PH;
+      return T + PH - Math.min(v, ymax) / ymax * PH;
+    }
+    var root = s("svg", { "class": "chart", viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Flexibility (RMSF) of each residue in each run, with the agreement between runs below" });
+    var clip = s("clipPath", { id: "plot-clip" });
+    clip.appendChild(s("rect", { x: L, y: T, width: PW, height: PH }));
+    root.appendChild(clip);
+    var ticks = [];
+    if (chartOpts.log) {
+      for (var dec = logLo; dec <= logHi * 1.0001; dec *= 10) [1, 2, 5].forEach(function (m) { var t = dec * m; if (t >= logLo * 0.9999 && t <= logHi * 1.0001) ticks.push(t); });
+    } else {
+      for (var t0 = 0; t0 <= ymax + 1e-9; t0 += step) ticks.push(t0);
+    }
+    ticks.forEach(function (t, k) {
+      root.appendChild(s("line", { "class": k === 0 ? "axis" : "grid", x1: L, x2: W - Rm, y1: y(t), y2: y(t) }));
+      var lbl = s("text", { x: L - 8, y: y(t) + 4, "text-anchor": "end" });
+      lbl.textContent = chartOpts.log ? String(Number(t.toPrecision(2))) : fixed(t, step < 0.1 ? 2 : 1);
+      root.appendChild(lbl);
+    });
+    var ylab = s("text", { x: 12, y: T + PH / 2, transform: "rotate(-90 12 " + (T + PH / 2) + ")", "text-anchor": "middle" });
+    ylab.textContent = chartOpts.log ? "RMSF (nm, log scale)" : "RMSF (nm)";
+    root.appendChild(ylab);
+    var bw = PW / R;
+    // chain ends and asked-about region
+    var first = D.classes.indexOf("n") >= 0 ? 0 : 0;
+    for (var a = 0; a < R; a++) {
+      if (D.classes[a] === "u") root.appendChild(s("rect", { "class": "ends", x: L + a * bw, y: T, width: bw + 0.5, height: PH }));
+    }
+    if (D.claim) {
+      var pos = D.claim.region_positions;
+      var r0 = Math.min.apply(null, pos), r1 = Math.max.apply(null, pos);
+      root.appendChild(s("rect", { "class": "region", x: L + r0 * bw, y: T, width: (r1 - r0 + 1) * bw, height: PH }));
+    }
+    var g = s("g", { "clip-path": "url(#plot-clip)" });
+    // band (min to max across runs) and mean
+    var top = [], bottom = [], mean = [];
+    for (var b = 0; b < R; b++) {
+      var vals = runIds.map(function (id) { return D.rmsf[id][b]; });
+      top.push([x(b), y(Math.max.apply(null, vals))]);
+      bottom.push([x(b), y(Math.min.apply(null, vals))]);
+      mean.push([x(b), y(vals.reduce(function (p, q) { return p + q; }, 0) / vals.length)]);
+    }
+    function path(points) { return points.map(function (p, k) { return (k ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(""); }
+    g.appendChild(s("path", { "class": "band", d: path(top) + path(bottom.slice().reverse()).replace(/^M/, "L") + "Z" }));
+    chart.runLines = {};
+    chart.thresholds = {};
+    runIds.forEach(function (id) {
+      var pts = D.rmsf[id].map(function (v, k) { return [x(k), y(v)]; });
+      var line = s("path", { "class": "runline", d: path(pts), "data-run": id });
+      g.appendChild(line);
+      chart.runLines[id] = line;
+      var th = D.summaries[id].threshold_nm;
+      var tl = s("line", { "class": "threshold", x1: L, x2: W - Rm, y1: y(th), y2: y(th), "data-run": id });
+      g.appendChild(tl);
+      chart.thresholds[id] = tl;
+    });
+    g.appendChild(s("path", { "class": "mean", d: path(mean) }));
+    root.appendChild(g);
+    // x ticks: residue numbers
+    var xstep = niceStep(R, 8);
+    for (var c = 0; c < R; c++) {
+      var num = D.residues[c].n;
+      if (num % xstep === 0) {
+        root.appendChild(s("line", { "class": "axis", x1: x(c), x2: x(c), y1: T + PH, y2: T + PH + 4 }));
+        var xl = s("text", { x: x(c), y: T + PH + 16, "text-anchor": "middle" });
+        xl.textContent = String(num);
+        root.appendChild(xl);
+      }
+    }
+    // agreement track
+    var ty = T + PH + 22;
+    var gap = bw >= 4 ? 1 : 0;
+    for (var d = 0; d < R; d++) {
+      var fillVar = CLASS_BY_KEY[D.classes[d]].v;
+      if (chartOpts.aa) { var grp = ConcordanceLogic.aaGroup(D.residues[d]); fillVar = grp ? AA_VAR[grp] : "--unscored"; }
+      var cell = s("rect", { "class": "cell", x: L + d * bw + gap / 2, y: ty, width: Math.max(bw - gap, 0.6), height: TRACK, fill: "var(" + fillVar + ")" });
+      root.appendChild(cell);
+    }
+    chart.cross = s("line", { "class": "crosshair", x1: 0, x2: 0, y1: T, y2: ty + TRACK, visibility: "hidden" });
+    root.appendChild(chart.cross);
+    var hit = s("rect", { "class": "chart-hit", x: L, y: T, width: PW, height: ty + TRACK - T, fill: "transparent" });
+    root.appendChild(hit);
+    var wrap = $("chart-wrap");
+    wrap.appendChild(root);
+    chart.tip = h("div", { "class": "tooltip", role: "presentation" });
+    wrap.appendChild(chart.tip);
+    chart.x = x; chart.root = root; chart.W = W; chart.T = T; chart.L = L; chart.PW = PW;
+    function indexFromEvent(ev) {
+      var box = root.getBoundingClientRect();
+      var px = (ev.clientX - box.left) / box.width * W;
+      return Math.max(0, Math.min(R - 1, Math.floor((px - L) / (PW / R))));
+    }
+    chart.pick = s("rect", { "class": "pick", x: 0, y: T, width: 0, height: PH, visibility: "hidden" });
+    root.insertBefore(chart.pick, chart.cross);
+    chart.bw = PW / R;
+    var drag = null;
+    hit.addEventListener("pointerdown", function (ev) {
+      if (ev.button !== 0) return;
+      drag = { a: indexFromEvent(ev), moved: false };
+      hit.setPointerCapture(ev.pointerId);
+    });
+    hit.addEventListener("pointermove", function (ev) {
+      var i = indexFromEvent(ev);
+      focusResidue(i, true);
+      if (drag) {
+        if (i !== drag.a) drag.moved = true;
+        if (drag.moved) drawPick(drag.a, i);
+      }
+    });
+    hit.addEventListener("pointerup", function (ev) {
+      if (!drag) return;
+      var i = indexFromEvent(ev);
+      if (drag.moved) explore(Math.min(drag.a, i), Math.max(drag.a, i));
+      drag = null;
+    });
+    hit.addEventListener("pointerleave", function () { if (!drag) focusResidue(null); });
+    wrap.addEventListener("keydown", function (ev) {
+      var cur = state.residue === null ? -1 : state.residue;
+      var next = null;
+      if (ev.key === "ArrowRight") next = Math.min(R - 1, cur + 1);
+      else if (ev.key === "ArrowLeft") next = Math.max(0, cur < 0 ? 0 : cur - 1);
+      else if (ev.key === "Home") next = 0;
+      else if (ev.key === "End") next = R - 1;
+      else if (ev.key === "Escape") { focusResidue(null); resetExplore(); return; }
+      if (next !== null) {
+        ev.preventDefault();
+        if (ev.shiftKey) {
+          if (state.anchor === null || state.anchor === undefined) state.anchor = cur < 0 ? next : cur;
+          explore(Math.min(state.anchor, next), Math.max(state.anchor, next));
+        } else { state.anchor = null; }
+        focusResidue(next, false);
+      }
+    });
+  }
+
+  var AA_VAR = { hydrophobic: "--aa-hydrophobic", aromatic: "--aa-aromatic", polar: "--aa-polar", positive: "--aa-positive", negative: "--aa-negative", "glycine/proline": "--aa-gp" };
+  var hasNames = D.residues.some(function (r) { return !!ConcordanceLogic.aaGroup(r); });
+  var chartOpts = { aa: false, log: false };
+  (function () {
+    var means = [];
+    for (var i = 0; i < R; i++) if (D.classes[i] !== "u") { var t = 0; D.runs.forEach(function (r) { t += D.rmsf[r.id][i]; }); means.push(t / N); }
+    means.sort(function (a, b) { return a - b; });
+    var low = means.length ? means[Math.floor(means.length / 10)] : 0, top = means.length ? means[means.length - 1] : 0;
+    chartOpts.log = !!D.disorder || (low > 0 && top / low > 20);  // a few residues move far more than the stillest ones
+  })();
+  function redrawChart() {
+    var wrap = $("chart-wrap");
+    while (wrap.firstChild) wrap.removeChild(wrap.firstChild);
+    renderChart();
+    if (state.pick) drawPick(state.pick.lo, state.pick.hi);
+    $("chart-scale").setAttribute("aria-pressed", chartOpts.log ? "true" : "false");
+    var note = $("scale-note");
+    note.hidden = !chartOpts.log;
+    note.textContent = "Log scale: each step up the axis is a multiple, so residues that move a little and residues that move a lot both stay readable.";
+    var legend = $("chart-legend");
+    while (legend.firstChild) legend.removeChild(legend.firstChild);
+    legend.hidden = !chartOpts.aa;
+    if (chartOpts.aa) Object.keys(AA_VAR).forEach(function (g) {
+      var sw = h("span", { "class": "swatch" }); sw.style.background = "var(" + AA_VAR[g] + ")";
+      legend.appendChild(h("li", {}, sw, g));
+    });
+  }
+  function setupChartControls() {
+    var aaInput = document.querySelector('#colour-by input[value="aa"]');
+    if (!hasNames) { aaInput.disabled = true; aaInput.parentNode.title = "Needs residue names: add a .pdb structure"; }
+    document.querySelectorAll('#colour-by input').forEach(function (input) {
+      input.addEventListener("change", function () { chartOpts.aa = input.value === "aa" && input.checked; redrawChart(); });
+    });
+    $("chart-scale").addEventListener("click", function () { chartOpts.log = !chartOpts.log; redrawChart(); });
+  }
+  function renderCompare() {
+    var grid = $("pair-grid"), pairs = L.pairAgreement(), byKey = {};
+    pairs.forEach(function (p) { byKey[p.a + ":" + p.b] = p; byKey[p.b + ":" + p.a] = p; });
+    grid.style.gridTemplateColumns = "auto repeat(" + N + ", auto)";
+    grid.appendChild(h("span"));
+    D.runs.forEach(function (r) { grid.appendChild(h("span", { "class": "ph", text: r.label.replace("Run ", "") })); });
+    var lo = Math.min.apply(null, pairs.map(function (p) { return p.share; }).concat([1]));
+    D.runs.forEach(function (ra, i) {
+      grid.appendChild(h("span", { "class": "ph", text: ra.label }));
+      D.runs.forEach(function (rb, j) {
+        if (i === j) { grid.appendChild(h("span", { "class": "self", "aria-hidden": "true" })); return; }
+        var p = byKey[i + ":" + j];
+        var b = h("button", { type: "button", "aria-pressed": "false", "aria-label": ra.label + " and " + rb.label + " agree on " + pct(p.share) + " of residues", text: pct(p.share) });
+        var strength = lo < 1 ? (1 - p.share) / (1 - lo) : 0;
+        b.style.background = "color-mix(in srgb, var(--dep) " + Math.round(8 + strength * 55) + "%, var(--panel))";
+        b.addEventListener("click", function () { showPair(p, b); });
+        grid.appendChild(b);
+      });
+    });
+    var table = $("sources-table");
+    table.appendChild(h("thead", {}, h("tr", {}, h("th", { text: "Run" }), h("th", { text: "From" }), h("th", { "class": "num", text: "Median RMSF (nm)" }), h("th", { "class": "num", text: "Residues moving a lot" }))));
+    var body = h("tbody");
+    D.runs.forEach(function (r) {
+      var sm = D.summaries[r.id];
+      body.appendChild(h("tr", {}, h("th", { scope: "row", text: r.label }), h("td", { text: r.source || "" }), h("td", { "class": "num", text: fixed(sm.median_rmsf_nm) }), h("td", { "class": "num", text: String(sm.flexible_residues) })));
+    });
+    table.appendChild(body);
+  }
+  function showPair(p, button) {
+    document.querySelectorAll("#pair-grid button").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+    button.setAttribute("aria-pressed", "true");
+    var ra = D.runs[p.a], rb = D.runs[p.b];
+    Object.keys(chart.runLines || {}).forEach(function (k) { chart.runLines[k].classList.remove("is-a", "is-b"); });
+    chart.runLines[ra.id].classList.add("is-a");
+    chart.runLines[rb.id].classList.add("is-b");
+    var box = $("pair-detail");
+    while (box.firstChild) box.removeChild(box.firstChild);
+    box.appendChild(h("p", { "class": "pair-key" }, h("span", {}, h("i"), ra.label), h("span", {}, h("i", { "class": "b" }), rb.label), h("span", { text: "highlighted on the chart" })));
+    box.appendChild(h("p", { text: ra.label + " and " + rb.label + " agree on " + p.same + " of " + p.total + " residues (" + pct(p.share) + ")." +
+      (p.spearman !== undefined && p.spearman !== null && !isNaN(p.spearman) ? " Their movement profiles correlate at ρ = " + fixed(p.spearman, 2) + "." : "") }));
+    if (p.differStretches.length) {
+      var chips = h("div", { "class": "ask-links" });
+      p.differStretches.slice(0, 12).forEach(function (st) {
+        var label = st[0] === st[1] ? String(D.residues[st[0]].n) : D.residues[st[0]].n + "–" + D.residues[st[1]].n;
+        var c = h("button", { "class": "ask-chip", type: "button", text: "Show " + label });
+        c.addEventListener("click", function () { explore(st[0], st[1]); $("takes-title").scrollIntoView({ behavior: "smooth", block: "start" }); });
+        chips.appendChild(c);
+      });
+      box.appendChild(h("p", { text: "They disagree here:" }));
+      box.appendChild(chips);
+    } else {
+      box.appendChild(h("p", { text: "They give the same answer for every residue." }));
+    }
+    box.hidden = false;
+  }
+  function renderAA() {
+    if (!hasNames) return;
+    var rows = L.aminoAcidSummary(), box = $("aa-bars");
+    if (!rows.length) return;
+    var top = rows[0].mean_rmsf_nm;
+    rows.forEach(function (r) {
+      var bar = h("i"); bar.style.width = (r.mean_rmsf_nm / top * 100) + "%"; bar.style.background = "var(" + AA_VAR[r.group] + ")";
+      var label = r.name.charAt(0).toUpperCase() + r.name.slice(1) + " · " + r.count;
+      box.appendChild(h("div", { "class": "aa-row", title: r.count + " residues: " + r.residues.join(", ") + (r.moving_in_most_runs ? ". " + r.moving_in_most_runs + " move a lot in most runs." : "") },
+        h("span", { text: label }), h("span", { "class": "aa-bar" }, bar), h("span", { "class": "aa-val", text: fixed(r.mean_rmsf_nm, 3) + " nm" })));
+    });
+    $("aa-section").hidden = false;
+  }
+
+  var state = { residue: null, run: null, anchor: null, pick: null };
+
+  function drawPick(a, b) {
+    var lo = Math.min(a, b), hi = Math.max(a, b);
+    chart.pick.setAttribute("x", chart.L + lo * chart.bw);
+    chart.pick.setAttribute("width", (hi - lo + 1) * chart.bw);
+    chart.pick.setAttribute("visibility", "visible");
+  }
+  // The verdict logic lives in logic.js (mirrors region_flexible() and classify() in concordance/verdict.py;
+  // tests/test_question_box.py checks they agree on every stretch).
+  var regionVerdict = L.regionVerdict;
+  function explore(lo, hi, idx, quiet) {
+    var v = idx ? L.verdictFor(idx) : regionVerdict(lo, hi);
+    var a = D.residues[lo].n, b = D.residues[hi].n;
+    drawPick(lo, hi);
+    var panel = $("explore");
+    if (!v) {
+      panel.hidden = false;
+      $("explore-pill").textContent = "";
+      $("explore-text").textContent = "Residues " + a + "\u2013" + b + " are chain ends, which are not scored. Pick a stretch further in.";
+      $("explore-risk").textContent = "";
+      return;
+    }
+    state.pick = { lo: lo, hi: hi, a: a, b: b };
+    var vn = verdictName(v.verdict);
+    var pill = $("explore-pill");
+    while (pill.firstChild) pill.removeChild(pill.firstChild);
+    var dot = h("span", { "class": "dot" }); dot.style.background = "var(" + vn.dot + ")";
+    pill.appendChild(dot); pill.appendChild(document.createTextNode(vn.label));
+    $("explore-text").textContent = (a === b ? "Residue " + a : "Residues " + a + "\u2013" + b) + ": " + v.yes + " of " + N + " runs say " + (a === b ? "it moves" : "this stretch moves") + " a lot.";
+    $("explore-risk").textContent = L.riskSentence(v);
+    $("explore-cmd").textContent = D.region_command.replace("{region}", a + "-" + b);
+    panel.hidden = !!quiet;
+    D.runs.forEach(function (run) {
+      var parts = takeParts[run.id], yes = v.answers[run.id];
+      parts.chip.textContent = yes ? "says yes" : "says no";
+      parts.chip.className = "chip" + (yes ? " yes" : "");
+      parts.detail.textContent = v.flagged[run.id] + " of " + v.scored + " residues picked move a lot";
+      parts.item.classList.remove("flip"); void parts.item.offsetWidth; parts.item.classList.add("flip");
+    });
+    var summary = $("pick-summary");
+    while (summary.firstChild) summary.removeChild(summary.firstChild);
+    summary.appendChild(h("strong", { text: a + "\u2013" + b + ":" }));
+    D.runs.forEach(function (run) {
+      summary.appendChild(h("span", { "class": "chip" + (v.answers[run.id] ? " yes" : ""), text: run.label + (v.answers[run.id] ? " yes" : " no") }));
+    });
+    summary.appendChild(h("span", { text: vn.label }));
+    summary.hidden = false;
+    highlightPick(lo, hi);
+    $("live").textContent = vn.label + ": " + v.yes + " of " + N + " runs say residues " + a + " to " + b + " move a lot.";
+  }
+  function resetExplore() {
+    state.pick = null; state.anchor = null;
+    $("explore").hidden = true;
+    $("pick-summary").hidden = true;
+    if (chart.pick) chart.pick.setAttribute("visibility", "hidden");
+    D.runs.forEach(function (run) {
+      var parts = takeParts[run.id];
+      parts.chip.textContent = parts.chipText; parts.chip.className = parts.chipClass; parts.detail.textContent = parts.detailText;
+    });
+    paintAll();
+  }
+  function highlightPick(lo, hi) {
+    if (!viewers.length) return;
+    paintAll();
+    var idx = []; for (var i = lo; i <= hi; i++) idx.push(i);
+    viewers.forEach(function (e) {
+      residueSelections(idx).forEach(function (sel) { e.viewer.addStyle(sel, { stick: { radius: 0.35, color: cssVar("--ink") } }); });
+      e.viewer.render();
+    });
+  }
+  function describeResidue(i) {
+    var r = D.residues[i];
+    var count = D.agreement[i];
+    var head = count < 0 ? r.l + ": chain end, not scored" : r.l + ": moves a lot in " + count + " of " + N + " runs";
+    return head;
+  }
+  function focusResidue(i, fromPointer) {
+    state.residue = i;
+    var tip = chart.tip;
+    if (i === null || i === undefined) {
+      chart.cross.setAttribute("visibility", "hidden");
+      tip.style.display = "none";
+      highlight3D(null);
+      return;
+    }
+    var cx = chart.x(i);
+    chart.cross.setAttribute("x1", cx);
+    chart.cross.setAttribute("x2", cx);
+    chart.cross.setAttribute("visibility", "visible");
+    while (tip.firstChild) tip.removeChild(tip.firstChild);
+    tip.appendChild(h("strong", { text: D.residues[i].l }));
+    var aaG = ConcordanceLogic.aaGroup(D.residues[i]);
+    if (aaG) tip.appendChild(h("div", { "class": "row" }, h("span", { text: aaG })));
+    var count = D.agreement[i];
+    tip.appendChild(h("div", { text: count < 0 ? "Chain end, not scored" : "Moves a lot in " + count + " of " + N + " runs" }));
+    var expert = document.body.getAttribute("data-audience") !== "new";
+    if (expert) {
+      D.runs.forEach(function (run) {
+        tip.appendChild(h("div", { "class": "row" }, h("span", { text: run.label }), h("span", { text: fixed(D.rmsf[run.id][i]) + " nm" + (D.flags[run.id][i] ? " *" : "") })));
+      });
+      tip.appendChild(h("div", { "class": "row" }, h("span", { text: "* above that run's threshold" })));
+    } else {
+      var vals = D.runs.map(function (run) { return D.rmsf[run.id][i]; });
+      tip.appendChild(h("div", { "class": "row" }, h("span", { text: "Range over runs" }), h("span", { text: fixed(Math.min.apply(null, vals), 2) + "–" + fixed(Math.max.apply(null, vals), 2) + " nm" })));
+    }
+    var box = chart.root.getBoundingClientRect();
+    var left = cx / chart.W * box.width;
+    tip.style.display = "block";
+    var tw = tip.offsetWidth;
+    tip.style.left = Math.max(0, Math.min(box.width - tw, left + 12)) + "px";
+    tip.style.top = "8px";
+    $("live").textContent = describeResidue(i);
+    highlight3D(i);
+  }
+  function setActiveRun(id) {
+    state.run = id;
+    Object.keys(chart.runLines || {}).forEach(function (k) {
+      chart.runLines[k].classList.toggle("is-active", k === id);
+      chart.thresholds[k].classList.toggle("is-active", k === id);
+      if (k === id) chart.runLines[k].parentNode.appendChild(chart.runLines[k]);
+    });
+    takeNodes.forEach(function (node) { node.classList.toggle("is-active", node.getAttribute("data-run") === id); });
+  }
+
+  // ------------------------------------------------------------ 3D
+  var viewers = [];
+  function residueSelections(indices) {
+    var byChain = {};
+    indices.forEach(function (i) {
+      var r = D.residues[i];
+      var key = r.c || "";
+      (byChain[key] = byChain[key] || []).push(r.n);
+    });
+    return Object.keys(byChain).map(function (chain) {
+      var sel = { resi: byChain[chain] };
+      if (chain) sel.chain = chain;
+      return sel;
+    });
+  }
+  function paint(v, colourOf) {
+    var groups = {};
+    for (var i = 0; i < R; i++) {
+      var col = colourOf(i);
+      (groups[col] = groups[col] || []).push(i);
+    }
+    v.setStyle({}, { cartoon: { color: cssVar("--none") } });
+    Object.keys(groups).forEach(function (col) {
+      residueSelections(groups[col]).forEach(function (sel) { v.setStyle(sel, { cartoon: { color: col } }); });
+    });
+    v.setBackgroundColor(cssVar("--stage"));
+    v.render();
+  }
+  function paintAll() {
+    viewers.forEach(function (entry) {
+      if (entry.run) paint(entry.viewer, function (i) { return runColour(entry.run, i); });
+      else paint(entry.viewer, classColour);
+    });
+  }
+  function fail3D(message) {
+    document.querySelectorAll("[data-viewer]").forEach(function (node) {
+      if (!node.querySelector(".viewer-fallback")) node.appendChild(h("div", { "class": "viewer-fallback", text: message }));
+    });
+  }
+  function residueIndex(atom) {
+    for (var i = 0; i < R; i++) {
+      var r = D.residues[i];
+      if (r.n === atom.resi && (!r.c || r.c === atom.chain)) return i;
+    }
+    return null;
+  }
+  function init3D() {
+    if (!D.has_structure) {
+      document.body.classList.add("no-3d");
+      $("takes-hint").textContent = "Add -s with a structure file (.pdb, .gro or .tpr) to see each run in 3D.";
+      $("consensus-viewer").appendChild(h("div", { "class": "viewer-fallback", text: "No structure was given, so there is no 3D view. The chart and the coloured track show the same agreement." }));
+      return;
+    }
+    if (!window.$3Dmol || typeof window.$3Dmol.createViewer !== "function") {
+      fail3D("The 3D view could not load here. The chart shows the same information.");
+      return;
+    }
+    try {
+      document.querySelectorAll("[data-viewer]").forEach(function (node) {
+        var v = window.$3Dmol.createViewer(node, { backgroundColor: cssVar("--stage"), antialias: true });
+        if (!v) throw new Error("no viewer");
+        v.addModel(D.pdb, "pdb");
+        v.setHoverable({}, true, function (atom) {
+          var i = residueIndex(atom);
+          if (i !== null) focusResidue(i, true);
+        }, function () { focusResidue(null); });
+        v.zoomTo();
+        v.zoom(1.15);
+        viewers.push({ viewer: v, run: node.getAttribute("data-run") });
+      });
+    } catch (e) {
+      viewers = [];
+      fail3D("The 3D view needs WebGL, which is not available here. The chart shows the same information.");
+      return;
+    }
+    viewers.forEach(function (a) { viewers.forEach(function (b) { if (a !== b) a.viewer.linkViewer(b.viewer); }); });
+    paintAll();
+    window.addEventListener("resize", function () { viewers.forEach(function (e) { e.viewer.resize(); }); });
+  }
+  var marks = [];
+  function highlight3D(i) {
+    marks.forEach(function (m) { m.viewer.removeShape(m.shape); });
+    marks = [];
+    if (i === null || i === undefined || !viewers.length) { viewers.forEach(function (e) { e.viewer.render(); }); return; }
+    var r = D.residues[i];
+    var sel = { resi: r.n, atom: "CA" };
+    if (r.c) sel.chain = r.c;
+    viewers.forEach(function (e) {
+      var atoms = e.viewer.getModel().selectedAtoms(sel);
+      if (atoms.length) {
+        var shape = e.viewer.addSphere({ center: { x: atoms[0].x, y: atoms[0].y, z: atoms[0].z }, radius: 2.2, color: cssVar("--ink"), alpha: 0.85 });
+        marks.push({ viewer: e.viewer, shape: shape });
+      }
+      e.viewer.render();
+    });
+  }
+
+  // ------------------------------------------------------------ lower sections
+  function renderCurve() {
+    var section = $("curve-section");
+    if (!D.claim || !D.claim.agreement_curve || !Object.keys(D.claim.agreement_curve).length) { section.hidden = true; return; }
+    var curve = D.claim.agreement_curve, plain = $("curve-plain"), bars = $("curve-bars");
+    Object.keys(curve).sort(function (a, b) { return a - b; }).forEach(function (k) {
+      var v = curve[k], n = Number(k);
+      if (n < N && n % 2 === 1) {
+        plain.appendChild(h("p", { text: (n === 1 ? "With a single run" : "With " + n + " runs") + ", you would reach the same answer as all " + N + " runs " + pct(v.same) + " of the time." }));
+      }
+      var bar = h("div", { "class": "bar", role: "img", "aria-label": n + " runs: same answer " + pct(v.same) + ", opposite " + pct(v.opposite) + ", tied " + pct(v.undecided) });
+      [["seg-same", v.same], ["seg-opp", v.opposite], ["seg-tie", v.undecided]].forEach(function (seg) {
+        if (seg[1] > 0) { var piece = h("i", { "class": seg[0] }); piece.style.width = (seg[1] * 100) + "%"; bar.appendChild(piece); }
+      });
+      bars.appendChild(h("div", { "class": "curve-row" }, h("span", { text: n + " run" + (n > 1 ? "s" : "") }), bar, h("span", { "class": "curve-value", text: pct(v.same) + " same" })));
+    });
+    [["--ink-2", "Same answer as all runs"], ["--dep", "Opposite answer"], ["--none", "Tied"]].forEach(function (item) {
+      var sw = h("span", { "class": "swatch" });
+      sw.style.background = "var(" + item[0] + ")";
+      $("curve-legend").appendChild(h("li", {}, sw, item[1]));
+    });
+  }
+  function renderRunsTable() {
+    var table = $("runs-table");
+    var head = [["Run", null], ["Frames", "num col-detail"], ["Median RMSF (nm)", "num col-detail"], ["Threshold (nm)", "num col-detail"], ["Flexible residues", "num col-detail"]];
+    if (D.claim) head.push(["In the region", null], ["Says", null]);
+    else head.push(["Would miss", "num"], ["Would add", "num"]);
+    var tr = h("tr");
+    head.forEach(function (col) { tr.appendChild(h("th", { "class": col[1], text: col[0], scope: "col" })); });
+    table.appendChild(h("thead", {}, tr));
+    var body = h("tbody");
+    D.runs.forEach(function (run) {
+      var sm = D.summaries[run.id];
+      var label = h("th", { scope: "row" }, run.label);
+      if (D.kind === "mdcath") label.appendChild(h("span", { "class": "run-id", text: "mdCATH replica " + run.id }));
+      var row = h("tr", {}, label,
+        h("td", { "class": "num col-detail", text: D.kind === "xvg" ? "in your files" : String(D.window.frames_used_per_run) }),
+        h("td", { "class": "num col-detail", text: fixed(sm.median_rmsf_nm) }),
+        h("td", { "class": "num col-detail", text: fixed(sm.threshold_nm) }),
+        h("td", { "class": "num col-detail", text: String(sm.flexible_residues) }));
+      if (D.claim) {
+        var pr = D.claim.per_replica[run.id];
+        row.appendChild(h("td", { text: pr.flexible_residues_in_region + " of " + pr.region_residues_scored + (document.body.getAttribute("data-audience") === "new" ? " move a lot" : "") }));
+        row.appendChild(h("td", { text: D.claim.answers[run.id] ? "yes" : "no" }));
+      } else {
+        row.appendChild(h("td", { "class": "num", text: String(sm.missed_consistent) }));
+        row.appendChild(h("td", { "class": "num", text: String(sm.extra_not_consistent) }));
+      }
+      body.appendChild(row);
+    });
+    table.appendChild(body);
+    table.appendChild(h("caption", { "class": "sr-only", text: "What each run, analysed on its own, would have concluded" }));
+  }
+  function kv(list, rows) {
+    rows.forEach(function (row) { if (row[1] === null || row[1] === undefined) return; list.appendChild(h("dt", { text: row[0] })); list.appendChild(h("dd", { text: row[1] })); });
+  }
+  function renderMethod() {
+    var m = D.method, rule = m.flexibility_rule;
+    var rho = Object.keys(D.spearman).map(function (k) { return D.spearman[k]; });
+    kv($("method-list"), [
+      ["Flexible means", D.rule_text],
+      ["Consistent means", "flagged in at least " + NEED + " of " + N + " runs (" + pct(m.consistency_threshold) + ")"],
+      ["Frames", D.kind === "xvg" ? "chosen when the RMSF files were made" : "the first " + D.window.frames_discarded + " of " + D.window.common_length + " skipped as equilibration (" + pct(m.discard_fraction) + "); all runs cut to the shortest"],
+      ["Engine", m.engine],
+      ["Cross-check", D.check.agree === null ? D.check.description : D.check.agree ? "an independent NumPy implementation agrees within " + D.check.max_abs_diff_nm.toExponential(1) + " nm" : "MDAnalysis and NumPy differ by up to " + fixed(D.check.max_abs_diff_nm, 4) + " nm; see the passport"],
+      ["Run-to-run similarity", rho.length ? "Spearman correlation of RMSF profiles between pairs of runs: " + fixed(Math.min.apply(null, rho), 2) + " to " + fixed(Math.max.apply(null, rho), 2) : null]
+    ]);
+    $("mda-code").textContent = D.mda_code;
+    var table = $("residue-table");
+    var tr = h("tr", {}, h("th", { text: "Residue", scope: "col" }));
+    D.runs.forEach(function (run) { tr.appendChild(h("th", { "class": "num", text: run.label + " (nm)", scope: "col" })); });
+    tr.appendChild(h("th", { "class": "num", text: "Runs flagging it", scope: "col" }));
+    table.appendChild(h("thead", {}, tr));
+    var body = h("tbody");
+    D.residues.forEach(function (res, i) {
+      var row = h("tr", {}, h("th", { scope: "row", text: res.l }));
+      D.runs.forEach(function (run) { row.appendChild(h("td", { "class": "num", text: fixed(D.rmsf[run.id][i]) + (D.flags[run.id][i] ? " *" : "") })); });
+      row.appendChild(h("td", { "class": "num", text: D.agreement[i] < 0 ? "not scored" : D.agreement[i] + " of " + N }));
+      body.appendChild(row);
+    });
+    table.appendChild(body);
+    var framed = false;
+    try { framed = window.self !== window.top; } catch (e) { framed = true; }
+    if (framed) $("csv-button").hidden = true;  // downloads are blocked inside embedded viewers
+    $("csv-button").addEventListener("click", function () {
+      var lines = [["chain", "residue_number", "residue"].concat(D.runs.map(function (r) { return "rmsf_nm_" + r.label.replace(" ", "_").toLowerCase(); })).concat(["runs_flagging", "scored"]).join(",")];
+      D.residues.forEach(function (res, i) {
+        lines.push([res.c, res.n, res.l].concat(D.runs.map(function (r) { return fixed(D.rmsf[r.id][i], 4); })).concat([Math.max(D.agreement[i], 0), D.agreement[i] >= 0]).join(","));
+      });
+      var blob = new Blob([lines.join("\n") + "\n"], { type: "text/csv" });
+      var a = h("a", { href: URL.createObjectURL(blob), download: D.name + "_" + D.condition.replace(/\s+/g, "") + "_rmsf.csv" });
+      document.body.appendChild(a); a.click(); a.remove();
+    });
+  }
+  function copyText(text, button) {
+    function done(ok) {
+      var old = button.textContent;
+      button.textContent = ok ? "Copied" : "Copy failed: select the text below";
+      setTimeout(function () { button.textContent = old; }, 1600);
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(fallback(text)); });
+    } else { done(fallback(text)); }
+    function fallback(t) {
+      var area = h("textarea", { "class": "sr-only" });
+      area.value = t; document.body.appendChild(area); area.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      area.remove();
+      return ok;
+    }
+  }
+  function renderPassport() {
+    var p = D.passport, src = p.source;
+    kv($("passport-list"), [
+      ["Passport id", p.passport_id],
+      ["Created", p.created_utc],
+      ["Question", p.question.text],
+      ["Data", src.files.map(function (f) { return f.file + " (sha256 " + f.sha256.slice(0, 16) + "…)"; }).join("; ")],
+      ["Dataset", src.dataset ? src.dataset.citation : null],
+      ["Dataset revision", src.dataset_revision || null],
+      ["Selection rule", src.selection_rule || null],
+      ["Licence note", src.dataset ? src.dataset.licence_note : null],
+      ["Software", Object.keys(p.software).map(function (k) { return k + " " + p.software[k]; }).join(", ")],
+      ["Replay", p.replay]
+    ]);
+    p.limitations.forEach(function (item) { $("limitations").appendChild(h("li", { text: item })); });
+    $("passport-json").textContent = JSON.stringify(p, null, 2);
+    $("copy-replay").addEventListener("click", function () { copyText(p.replay, this); });
+    $("copy-passport").addEventListener("click", function () { copyText(JSON.stringify(p, null, 2), this); });
+  }
+
+  // ------------------------------------------------------------ the question box
+  var lastAsked = null;
+  function answerQuestion(text, options) {
+    options = options || {};
+    text = String(text || "").trim();
+    var box = $("ask-answer");
+    if (!text) { $("ask-input").focus(); return null; }
+    var audience = document.body.getAttribute("data-audience");
+    var a = L.ask(text, audience);
+    lastAsked = text;
+    while (box.firstChild) box.removeChild(box.firstChild);
+    box.className = "ask-answer" + (a.unknown ? " is-unknown" : "");
+    box.appendChild(h("p", { "class": "ask-you" }, "You asked: “" + text + "”", a.understood ? h("br") : null, a.understood));
+    if (a.verdict) {
+      var dot = h("span", { "class": "dot" });
+      dot.style.background = "var(" + a.verdict.dot + ")";
+      box.appendChild(h("p", { "class": "verdict" }, h("span", { "class": "pill" }, dot, a.verdict.label)));
+    }
+    var keep = audience === "new" ? 2 : a.lines.length, more = null;
+    a.lines.forEach(function (line, k) {
+      var para = h("p", { "class": k === 0 && (a.verdict || line.length < 110) ? "ask-lead" : null, text: line });
+      if (k < keep) { box.appendChild(para); return; }
+      if (!more) { more = h("details", { "class": "ask-more" }, h("summary", { text: "More detail" })); box.appendChild(more); }
+      more.appendChild(para);
+    });
+    if (a.explore && a.verdict) {
+      var thing = a.explore.lo === a.explore.hi ? "residue" : "stretch";
+      box.appendChild(h("p", { "class": "ask-note", text: "The " + (N === 5 ? "five" : N) + " runs below now show their answers, and the " + thing + " is marked on the chart" + (viewers.length ? " and in 3D." : ".") }));
+    }
+    if (a.links.length) {
+      var links = h("div", { "class": "ask-links" });
+      a.links.forEach(function (link) {
+        var b = h("button", { "class": "ask-chip", type: "button", text: link.text });
+        b.addEventListener("click", function () {
+          if (link.ask) { $("ask-input").value = link.ask; answerQuestion(link.ask); return; }
+          explore(link.lo, link.hi);
+          $("takes-title").scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+        links.appendChild(b);
+      });
+      box.appendChild(links);
+    }
+    if (a.command && audience === "check") {
+      var code = h("code", { text: a.command });
+      var copy = h("button", { "class": "btn", type: "button", text: "Copy the command that gives this a receipt" });
+      copy.addEventListener("click", function () { copyText(a.command, copy); });
+      box.appendChild(h("p", { "class": "muted", text: "Same answer from the command line, with an evidence passport:" }));
+      box.appendChild(code);
+      box.appendChild(h("div", { "class": "actions" }, copy));
+    }
+    if (claudeSample) {
+      var more = h("button", { "class": "btn-claude", type: "button" }, a.unknown ? "\u2726 Ask Claude instead" : "\u2726 Ask Claude to explain");
+      more.addEventListener("click", function () { askClaude(text); });
+      box.appendChild(h("div", { "class": "actions" }, more));
+    }
+    box.hidden = false;
+    if (!options.quiet) {
+      if (a.explore) explore(a.explore.lo, a.explore.hi, a.explore.idx, true);
+      setActiveRun(a.run || null);
+    }
+    return a;
+  }
+  function setupAsk() {
+    var chips = $("ask-suggest");
+    L.suggestions().forEach(function (text) {
+      var b = h("button", { "class": "ask-chip", type: "button", text: text });
+      b.addEventListener("click", function () { $("ask-input").value = text; answerQuestion(text); });
+      chips.appendChild(b);
+    });
+    $("ask-form").addEventListener("submit", function (ev) { ev.preventDefault(); answerQuestion($("ask-input").value); });
+    setupClaude();
+  }
+
+
+  // ------------------------------------------------------------ Claude, with the engine as its tools
+  // Only where the page runs inside Claude (a published artifact): window.claude.use("sample").
+  // Claude calls the engine for every number; the page shows each call live, drives the films and
+  // the 3D from it, and checks every number in Claude's answer against what the engine returned.
+  // Outside Claude (for example on GitHub Pages), the same Ask Claude works with the reader's own
+  // Anthropic API key: kept in memory (or this tab's sessionStorage if they tick the box), sent only
+  // to api.anthropic.com, never written into the page or the repository.
+  var claudeSample = null, claudeCtl = null, claudeVia = null, pendingQuestion = null;
+  var session = {
+    get: function (k) { try { return window.sessionStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { if (v === null) window.sessionStorage.removeItem(k); else window.sessionStorage.setItem(k, v); } catch (e) { /* unavailable */ } }
+  };
+  function apiKey() { return window.__concordanceKey || session.get("concordance.apikey") || ""; }
+  function modelName() { return $("claude-model").value || "claude-sonnet-5-5"; }
+  function modelLabel() { var o = $("claude-model").selectedOptions[0]; return o ? o.textContent : modelName(); }
+  function showKeyForm(message) {
+    $("claude-key").hidden = false;
+    $("claude-key-msg").textContent = message || "";
+    $("claude-key-input").focus();
+  }
+  function useKeyMode() {
+    claudeVia = "key";
+    claudeSample = apiSample;
+    $("claude-row").hidden = false;
+    document.querySelector(".claude-deep input#claude-deep").parentNode.hidden = true;
+    $("claude-key-change").hidden = !apiKey();
+    $("ask-hint").textContent = "Ask answers instantly in your browser and sends nothing. Ask Claude sends your question to Claude with your API key; Claude gets every number from the same engine through tools, and the page checks each number it writes.";
+  }
+  function setupClaude() {
+    window.__concordanceAskClaude = askClaude;
+    window.__concordanceStopClaude = function () { if (claudeCtl) claudeCtl.abort(); };
+    if (!window.__concordanceClaudeWired) {
+      window.__concordanceClaudeWired = true;
+      $("ask-claude").addEventListener("click", function () { window.__concordanceAskClaude($("ask-input").value); });
+      $("claude-stop").addEventListener("click", function () { window.__concordanceStopClaude(); });
+      $("claude-key").addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var key = $("claude-key-input").value.trim();
+        if (!/^sk-ant-[A-Za-z0-9_\-]{10,}$/.test(key)) { $("claude-key-msg").textContent = "That doesn't look like an Anthropic API key (it starts with sk-ant-)."; return; }
+        window.__concordanceKey = key;
+        session.set("concordance.apikey", $("claude-remember").checked ? key : null);
+        session.set("concordance.model", modelName());
+        $("claude-key-input").value = "";
+        $("claude-key").hidden = true;
+        $("claude-key-change").hidden = false;
+        var q = pendingQuestion || $("ask-input").value;
+        pendingQuestion = null;
+        if (String(q || "").trim()) window.__concordanceAskClaude(q);
+      });
+      $("claude-key-forget").addEventListener("click", function () {
+        window.__concordanceKey = "";
+        session.set("concordance.apikey", null);
+        $("claude-key-input").value = "";
+        $("claude-key-change").hidden = true;
+        $("claude-key-msg").textContent = "Forgotten.";
+      });
+      $("claude-key-change").addEventListener("click", function () { showKeyForm(""); });
+      var savedModel = session.get("concordance.model");
+      if (savedModel) $("claude-model").value = savedModel;
+    }
+    if (window.claude && typeof window.claude.use === "function") {
+      Promise.resolve(window.claude.use("sample")).then(function (fn) {
+        if (!fn) { useKeyMode(); return; }
+        var lit = function () {
+          claudeSample = fn;
+          claudeVia = "artifact";
+          $("claude-row").hidden = false;
+          $("ask-hint").textContent = "Ask answers instantly in your browser and sends nothing. Ask Claude sends your question to Claude, which gets every number from the same engine through tools; the page then checks each number Claude writes against the engine's results.";
+        };
+        if (typeof fn.limits === "function") fn.limits().then(function (lim) { if (lim && lim.tools) lit(); else useKeyMode(); }, function () { useKeyMode(); });
+        else lit();
+      }, function () { useKeyMode(); });
+    } else {
+      useKeyMode();
+    }
+  }
+  // The Messages API with the engine as tools: Claude asks, the page runs the tool, and so on until Claude answers.
+  function apiSample(prompt, opts) {
+    var byName = {};
+    opts.tools.forEach(function (t) { byName[t.name] = t; });
+    var tools = opts.tools.map(function (t) { return { name: t.name, description: t.description, input_schema: t.inputSchema }; });
+    var messages = [{ role: "user", content: prompt }];
+    var turns = 0, lastText = "";
+    function fail(message, code) { var e = new Error(message); e.code = code; return e; }
+    function step() {
+      if (++turns > 10) return Promise.resolve({ text: lastText, truncated: true });
+      return fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST", signal: opts.signal,
+        headers: { "content-type": "application/json", "x-api-key": apiKey(), "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
+        body: JSON.stringify({ model: modelName(), max_tokens: 1024, tools: tools, messages: messages })
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (body) {
+          if (!r.ok) {
+            var msg = (body && body.error && body.error.message) || ("HTTP " + r.status);
+            throw fail(msg, r.status === 401 || r.status === 403 ? "auth" : r.status === 429 || r.status === 529 ? "rate_limited"
+              : /credit|billing|balance/i.test(msg) ? "credit" : r.status === 404 || /model/i.test(msg) ? "model" : "error");
+          }
+          return body;
+        });
+      }).then(function (body) {
+        var content = body.content || [];
+        var text = content.filter(function (b) { return b.type === "text"; }).map(function (b) { return b.text; }).join("");
+        if (text) { lastText = text; if (opts.onText) opts.onText({ text: text }); }
+        if (body.stop_reason === "tool_use") {
+          messages.push({ role: "assistant", content: content });
+          var replies = content.filter(function (b) { return b.type === "tool_use"; }).map(function (b) {
+            var out, isError = false;
+            try { out = byName[b.name] ? byName[b.name].execute(b.input) : { error: "No tool called " + b.name }; isError = !byName[b.name]; }
+            catch (e) { out = { error: e.message }; isError = true; }
+            return { type: "tool_result", tool_use_id: b.id, content: JSON.stringify(out), is_error: isError };
+          });
+          messages.push({ role: "user", content: replies });
+          return step();
+        }
+        return { text: text, truncated: body.stop_reason === "max_tokens" };
+      });
+    }
+    return step().catch(function (e) {
+      if (e && e.name === "AbortError") throw fail("Stopped.", "cancelled");
+      if (e && !e.code) throw fail("Couldn't reach api.anthropic.com (offline, or blocked on this network).", "network");
+      throw e;
+    });
+  }
+  function publicCopy(result) { return JSON.parse(JSON.stringify(result, function (k, v) { return k.charAt(0) === "_" ? undefined : v; })); }
+  function claudeTools(results) {
+    var first = D.residues[0].n, last = D.residues[R - 1].n;
+    function tool(name, description, schema, run, label, summary) {
+      return { name: name, description: description, inputSchema: schema, execute: function (input) {
+        input = input || {};
+        var li = h("li", {}, label(input));
+        $("claude-trace").appendChild(li);
+        $("claude-status").textContent = "Checking with the engine…";
+        try {
+          var result = run(input);
+          results.push(result);
+          li.className = "is-done";
+          while (li.firstChild) li.removeChild(li.firstChild);
+          var text = label(input) + ": " + summary(result);
+          if (result && result._explore) {
+            var ex = result._explore;
+            var b = h("button", { type: "button", text: text });
+            b.addEventListener("click", function () { explore(ex.lo, ex.hi, ex.idx); });
+            li.appendChild(b);
+            explore(ex.lo, ex.hi, ex.idx);
+            setActiveRun(ex.run || null);
+          } else {
+            li.appendChild(document.createTextNode(text));
+            if (result && result._run) setActiveRun(result._run);
+          }
+          return publicCopy(result);
+        } catch (e) {
+          li.className = "is-error";
+          li.textContent = label(input) + ": " + e.message;
+          throw e;
+        }
+      } };
+    }
+    var region = { type: "object", properties: { start: { type: "integer", description: "first residue number" }, end: { type: "integer", description: "last residue number (same as start for one residue)" } }, required: ["start", "end"] };
+    var tools = [
+      tool("check_region", "Is residues start-end flexible ('moves a lot')? Checked separately in every run. Returns how many runs say yes, the verdict, how many runs analysed alone would give the opposite answer, per-run detail, and how many of 9 threshold settings give the same verdict. Residues are numbered " + first + "-" + last + ". Optional run (1-" + N + ") adds that run's own answer.",
+        { type: "object", properties: { start: region.properties.start, end: region.properties.end, run: { type: "integer", description: "optional run number, 1-" + N } }, required: ["start", "end"] },
+        function (i) { return L.engine.checkRegion(i.start, i.end, i.run); },
+        function (i) { return "Checked residues " + (i.start === i.end || i.end === undefined ? i.start : i.start + "–" + i.end) + (i.run ? " in run " + i.run : ""); },
+        function (r) { return r.scored === false ? "chain ends, not scored" : r.verdict + ", " + r.runs_saying_it_moves_a_lot + " of " + r.total_runs + " runs"; }),
+      tool("protein_overview", "The whole protein: which stretches move a lot in most runs (consistent), which only in some runs (replica-dependent, where the runs disagree), and counts. Use for 'which parts are flexible?' or 'where do the runs disagree?'.",
+        { type: "object", properties: {} }, function () { return L.engine.overview(); },
+        function () { return "Looked at the whole protein"; },
+        function (r) { return r.consistent_residues + " consistent, " + r.replica_dependent_residues + " replica-dependent"; }),
+      tool("run_alone", "What one run, analysed on its own, would conclude about the whole protein compared with all runs together (residues it would miss or add), plus its threshold and median RMSF in nm.",
+        { type: "object", properties: { run: { type: "integer", description: "run number, 1-" + N } }, required: ["run"] },
+        function (i) { return L.engine.runAlone(i.run); }, function (i) { return "Looked at run " + i.run + " alone"; },
+        function (r) { return r.residues_moving_a_lot_in_this_run + " residues move a lot; would miss " + r.consistent_residues_it_would_miss + ", add " + r.residues_it_would_flag_that_most_runs_do_not; }),
+      tool("rank_residues", "The residues that move most (or least) on average over the runs, with mean RMSF in nm and how many runs say each moves a lot. Chain ends excluded.",
+        { type: "object", properties: { direction: { type: "string", enum: ["most", "least"] }, count: { type: "integer", description: "how many, 1-10" } }, required: ["direction"] },
+        function (i) { return { residues: L.engine.ranking(i.direction, i.count) }; },
+        function (i) { return "Ranked residues that move " + (i.direction === "least" ? "least" : "most"); },
+        function (r) { return r.residues.map(function (x) { return x.residue; }).join(", "); }),
+      tool("threshold_check", "Does the answer depend on the threshold for 'moves a lot'? Re-runs the verdict under 9 reasonable settings. With start/end: for that stretch. Without: how many residues count as consistent under each setting for the whole protein.",
+        { type: "object", properties: { start: region.properties.start, end: region.properties.end } },
+        function (i) { return L.engine.thresholdCheck(i.start, i.end); },
+        function (i) { return "Re-checked under 9 threshold settings" + (i.start !== undefined && i.start !== null ? " for " + i.start + "–" + (i.end === undefined ? i.start : i.end) : ""); },
+        function (r) { return r.same_verdict_under ? "same verdict under " + r.same_verdict_under : r.residues_consistent_under_every_setting + " residues consistent under every setting"; })
+    ];
+    if (D.claim && D.claim.agreement_curve) tools.push(tool("fewer_runs", "For the stretch in the page's headline question: with only 1, 2, ... runs, how often you'd reach the same answer as all runs (exact, every subset of runs).",
+      { type: "object", properties: {} }, function () { return L.engine.fewerRuns(); }, function () { return "Worked out what fewer runs would have said"; },
+      function (r) { return r.with_1_runs ? "one run: same answer " + r.with_1_runs.same_answer_as_all_runs_percent + "% of the time" : "done"; }));
+    return tools;
+  }
+  function claudePrompt(question, audience) {
+    var first = D.residues[0].n, last = D.residues[R - 1].n;
+    var style = audience === "new" ? "The reader is new to simulations: use plain words and no jargon, explain any technical term in a few words, at most 110 words."
+      : audience === "expert" ? "The reader runs simulations: be precise; RMSF, nm and thresholds are fine. At most 130 words."
+      : "The reader is checking the work: be precise and say which engine result supports each statement. At most 130 words.";
+    return [
+      "You are answering a question inside a Concordance report. Concordance compares how much each residue of a protein moves (its RMSF) across " + N + " repeat simulation runs of " + D.name + (D.synthetic ? " (synthetic test data with a designed answer, not a real simulation)" : "") + ". Residues are numbered " + first + " to " + last + ".",
+      "In each run, a residue 'moves a lot' when it moves well above that run's typical residue. 'Consistent across runs' means it moves a lot in at least " + NEED + " of " + N + " runs; 'replica-dependent' means " + (FEW + 1 === NEED - 1 ? FEW + 1 : (FEW + 1) + "-" + (NEED - 1)) + " of " + N + " (the runs disagree); 'not seen in most runs' means fewer.",
+      D.claim && D.claim.region ? "The page's headline question is whether residues " + D.claim.region[0] + "-" + D.claim.region[1] + " are flexible." : "",
+      "Rules:",
+      "- Get every number, residue and verdict from the tools. Never estimate, calculate or invent one yourself: the page checks every number you write against the tool results and flags any that don't match.",
+      "- Call the tools you need first, without commentary. Then write only the final answer.",
+      "- " + style,
+      "- Plain text only: no markdown, headings or bullet symbols. British spelling.",
+      "- Where it helps, say that agreement between runs isn't proof the simulation is right, while disagreement is a warning that one run isn't enough.",
+      "- If the tools can't answer the question (for example about binding, function or the force field), say so in one sentence and suggest what this page can tell them.",
+      "",
+      "The reader's question: " + JSON.stringify(question)
+    ].filter(function (line) { return line !== ""; }).join("\n");
+  }
+  function renderClaudeText(text, audit) {
+    var box = $("claude-text");
+    while (box.firstChild) box.removeChild(box.firstChild);
+    var at = 0;
+    (audit ? audit.spans : []).forEach(function (sp) {
+      if (sp.start > at) box.appendChild(document.createTextNode(text.slice(at, sp.start)));
+      box.appendChild(sp.ok ? h("span", { "class": "num-ok", title: "Matches the engine's results" }, sp.value)
+        : h("mark", { "class": "num-bad", title: "Not found in the engine's results" }, sp.value));
+      at = sp.end;
+    });
+    box.appendChild(document.createTextNode(text.slice(at)));
+  }
+  function askClaude(question) {
+    question = String(question || "").trim();
+    if (!question) { $("ask-input").focus(); return; }
+    if (!claudeSample) return;
+    if (claudeVia === "key" && !apiKey()) { pendingQuestion = question; showKeyForm(""); return; }
+    if (claudeCtl) claudeCtl.abort();
+    var ctl = new AbortController();
+    claudeCtl = ctl;
+    var results = [], audience = document.body.getAttribute("data-audience");
+    var panel = $("claude-answer");
+    panel.hidden = false;
+    $("claude-question").textContent = "You asked: “" + question + "”";
+    while ($("claude-trace").firstChild) $("claude-trace").removeChild($("claude-trace").firstChild);
+    $("claude-text").textContent = "";
+    $("claude-audit").hidden = true; $("claude-foot").hidden = true;
+    $("claude-status").textContent = "Thinking…";
+    $("claude-stop").hidden = false;
+    $("ask-claude").disabled = true;
+    function done() { $("claude-stop").hidden = true; $("ask-claude").disabled = false; if (claudeCtl === ctl) claudeCtl = null; }
+    claudeSample(claudePrompt(question, audience), {
+      tools: claudeTools(results), signal: ctl.signal, modelTier: $("claude-deep").checked ? "default" : "quick",
+      onText: function (u) { $("claude-text").textContent = u.text.trim(); $("claude-status").textContent = "Writing…"; }
+    }).then(function (res) {
+      var text = String(res.text || "").replace(/\*\*/g, "").trim();
+      var audit = L.auditNumbers(text, results, question);
+      renderClaudeText(text, audit);
+      var line = $("claude-audit");
+      line.hidden = false;
+      if (!audit.checked) { line.className = "claude-audit"; line.textContent = "No numbers in this answer to check."; }
+      else if (!audit.unsupported.length) { line.className = "claude-audit ok"; line.textContent = "✓ All " + audit.checked + " numbers in this answer match what the engine returned."; }
+      else { line.className = "claude-audit warn"; line.textContent = "⚠ " + audit.unsupported.length + " of " + audit.checked + (audit.unsupported.length === 1 ? " numbers is" : " numbers are") + " not in the engine's results (" + audit.unsupported.join(", ") + "). Treat " + (audit.unsupported.length === 1 ? "it" : "them") + " with care."; }
+      $("claude-foot").textContent = (claudeVia === "key" ? "Answered by " + modelLabel() + " through the Claude API with your key. " : "") +
+        "Claude saw your question and the engine's answers listed above, not your files. Numbers underlined in green match what the engine returned.";
+      $("claude-foot").hidden = false;
+      $("claude-status").textContent = (res.truncated ? "Cut short. " : "") + (results.length ? "Used the engine " + results.length + " time" + (results.length === 1 ? "" : "s") + "." : "Answered without the engine.");
+      done();
+    }, function (e) {
+      var code = e && e.code;
+      if (e && e.text && code !== "refused") $("claude-text").textContent = e.text;
+      else $("claude-text").textContent = "";
+      var hide = ["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed", "tools_unavailable"].indexOf(code) >= 0;
+      if (claudeVia === "key" && (code === "auth" || code === "credit" || code === "model")) {
+        if (code === "auth") { window.__concordanceKey = ""; session.set("concordance.apikey", null); }
+        showKeyForm(code === "auth" ? "That key wasn't accepted. Check it and try again." : code === "credit" ? "The API account has no credits left: " + (e.message || "") : "That model isn't available on this key: " + (e.message || ""));
+      }
+      $("claude-status").textContent = code === "auth" ? "The API key wasn't accepted." : code === "credit" ? "No API credits left on that account." : code === "model" ? "That model isn't available; pick another." : code === "network" ? e.message : code === "error" ? "Claude API error: " + e.message : code === "cancelled" ? "Stopped." : code === "rate_limited" ? "Claude is busy, or a usage limit was reached. Try again later; the Ask button still works."
+        : code === "refused" ? "Claude declined this question. Try rewording it." : hide ? "Claude isn't available here. The Ask button still works."
+        : "Something went wrong reaching Claude. You can try again.";
+      if (hide) { claudeSample = null; $("claude-row").hidden = true; }
+      done();
+    });
+  }
+
+  // ------------------------------------------------------------ audience and theme
+  function setAudience(value, remember) {
+    if (["new", "expert", "check"].indexOf(value) < 0) value = "new";
+    document.body.setAttribute("data-audience", value);
+    document.querySelectorAll('#audience input').forEach(function (input) { input.checked = input.value === value; });
+    if (remember) store.set("concordance.audience", value);
+    var runsTable = $("runs-table");
+    if (runsTable && runsTable.firstChild) { while (runsTable.firstChild) runsTable.removeChild(runsTable.firstChild); renderRunsTable(); }
+    if (state.residue !== null) focusResidue(state.residue);
+    if (lastAsked) answerQuestion(lastAsked, { quiet: true });
+  }
+  function setupAudience() {
+    var fromHash = (location.hash || "").replace("#", "");
+    setAudience(["new", "expert", "check"].indexOf(fromHash) >= 0 ? fromHash : store.get("concordance.audience") || D.audience, false);
+    document.querySelectorAll('#audience input').forEach(function (input) {
+      input.addEventListener("change", function () { setAudience(input.value, true); });
+    });
+  }
+  function currentTheme() {
+    var set = document.documentElement.getAttribute("data-theme");
+    if (set) return set;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function setupTheme() {
+    var saved = store.get("concordance.theme");
+    if (saved === "dark" || saved === "light") document.documentElement.setAttribute("data-theme", saved);
+    var button = $("theme-toggle");
+    function label() { button.textContent = currentTheme() === "dark" ? "Light mode" : "Dark mode"; }
+    label();
+    button.addEventListener("click", function () {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      store.set("concordance.theme", next);
+      label();
+      paintAll();
+    });
+    if (window.matchMedia) {
+      var mq = window.matchMedia("(prefers-color-scheme: dark)");
+      var onChange = function () { if (!document.documentElement.getAttribute("data-theme")) { label(); paintAll(); } };
+      if (mq.addEventListener) mq.addEventListener("change", onChange);
+    }
+  }
+
+  renderText();
+  renderTakes();
+  renderLegend();
+  setupChartControls();
+  redrawChart();
+  renderCompare();
+  renderAA();
+  renderCurve();
+  renderRunsTable();
+  renderMethod();
+  renderPassport();
+  setupAsk();
+  if (!window.__concordanceBooted) { setupAudience(); setupTheme(); } else { setAudience(document.body.getAttribute("data-audience"), false); }
+  window.__concordanceBooted = true;
+  init3D();
+  $("explore-reset").addEventListener("click", function () { resetExplore(); });
+  $("explore-copy").addEventListener("click", function () { copyText($("explore-cmd").textContent, this); });
+  window.__concordance = { viewers: viewers, focusResidue: focusResidue, setAudience: setAudience, setActiveRun: setActiveRun,
+    regionVerdict: regionVerdict, explore: explore, resetExplore: resetExplore, ask: answerQuestion, logic: L, data: D };
+  }
+})();
+</script>
+</body>
+</html>

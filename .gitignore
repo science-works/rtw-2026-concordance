@@ -1,0 +1,22 @@
+# Data is downloaded by scripts/download_demo_data.py and never committed
+data/
+*.h5
+.cache/
+
+# Generated answers, passports and structures (small cached results go in results/)
+outputs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+build/
+dist/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
