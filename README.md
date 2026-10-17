@@ -6,6 +6,23 @@ Concordance adds replicate awareness to [MDAnalysis](https://www.mdanalysis.org)
 
 Built at **Reinvent the Wheel** (Science Works × Inherent), London, 16–18 October 2026.
 
+```bash
+uvx --from git+https://github.com/tammy357/concordance concordance check ~/Downloads/your_data.zip --open
+```
+
+One command: tell you what each file is, compare the runs, check any published RMSF table, chart the rest, and open a report. No install, nothing to clone. See [Quick start](#quick-start) for more ways in, or try the [live website](#no-terminal-use-the-website) — no terminal needed.
+
+### Contents
+
+- [The wheel it reinvents](#the-wheel-it-reinvents) — the old workflow this replaces
+- [The software it builds on](#the-software-it-builds-on) · [What was not working](#what-was-not-working) · [What Concordance adds](#what-concordance-adds)
+- [Quick start](#quick-start) — every way in: a zip, mdCATH, your own GROMACS/AMBER/NAMD runs, files you already have, a paper's data, the website, Claude
+- [How the answer is worked out](#how-the-answer-is-worked-out) — the rule, and why
+- [A first result on real data](#a-first-result-on-real-data)
+- [What has been tested](#what-has-been-tested) — 71 automated tests, plus real cold-download results
+- [How this relates to existing tools](#how-this-relates-to-existing-tools) · [What it doesn't do](#what-it-doesnt-do) · [Limitations](#limitations)
+- [Data, licences and credit](#data-licences-and-credit)
+
 ## The wheel it reinvents
 
 Today, checking whether repeated simulations of a protein agree is a chain of old tools and hand work:
@@ -67,6 +84,8 @@ Two everyday ways to get it:
 ## Quick start
 
 You need [uv](https://docs.astral.sh/uv/) (or pip) and Python 3.10 or newer. Tested on Python 3.13 with MDAnalysis 2.10.
+
+Jump to what you have: [a zip or folder](#already-have-per-residue-rmsf-from-any-tool-use-the-files-you-have) (one command, below) · [mdCATH](#on-the-mdcath-dataset) · [your own GROMACS/AMBER/NAMD runs](#on-your-own-gromacs-or-amber-namd--runs) · [RMSF files you already have](#already-have-per-residue-rmsf-from-any-tool-use-the-files-you-have) · [a paper's unlabelled files](#files-from-a-paper-in-formats-you-dont-recognise) · [no terminal](#no-terminal-use-the-website) · [ask in plain English](#ask-in-plain-english-claude-code)
 
 **Got a folder or a .zip of simulation files?** One command, nothing to clone:
 
@@ -240,6 +259,8 @@ In other words, the list of "flexible residues" you would report from a single r
 
 There are 71 automated tests (`pytest`) and a self-test anyone can run (`concordance selftest`).
 
+### On real, cold-downloaded data
+
 - **On a real database entry, from a cold download.** ATLAS entry 6in7_A (MucA, 81 residues): `identify` went through all 16 files in the downloaded zip, paired the three protein-only trajectories with the structure (and not with the whole-system `.tpr` files, which have 19,671 atoms), picked the RMSF table out of about ten tables, and left out the ones that aren't per-residue values.
 - **`plot` reads real GROMACS `.xvg` headers** (titles, axis labels, legends, Grace escape codes such as Δ and superscripts, and multiple data sets), tables with a time column, and tables of values only; runs are shaded as a group, but different quantities (say, potential energy and temperature) get a chart each instead of sharing one axis.
 - **Ask Claude with your own key** was tested in Chromium against a stand-in for the Claude API: the key stays out of storage unless asked, the request carries the engine as tools, the tool results go back to Claude, a made-up number in the answer is flagged, and a rejected key brings the key form back. A test checks the published page carries no key.
@@ -249,6 +270,8 @@ There are 71 automated tests (`pytest`) and a self-test anyone can run (`concord
 - **The same simulation in three formats gives the same answer.** Cobrotoxin saved as `.xtc`, `.trr` and H5MD gives the same RMSF to within 0.002 nm (`.xtc` stores 0.001 nm), and Concordance warns that these are one simulation saved several times, not independent runs.
 - **Published tables are lined up and checked.** Given a published-style RMSF table in ångström, with no residue column or with numbering offset by 100, and with its columns in the opposite order to the files, `reproduce` finds the units, the offset, the column order and the recipe that made it, and calls it reproduced. The same table with its rows shuffled is called not reproduced.
 
+### Correctness checks
+
 - **It reproduces the dataset's own numbers.** On the same six real mdCATH domains, Concordance's RMSF matches the values stored in mdCATH for every run (Pearson r 0.970 to 1.000), and MDAnalysis and NumPy agree to within 10⁻⁷ nm. See [`VALIDATION.md`](VALIDATION.md).
 - **Two implementations agree.** On the test data, MDAnalysis and the independent NumPy implementation agree to within 10⁻⁷ nm, and every passport records the difference for its own data.
 - **It matches MDAnalysis's own recipe.** On MDAnalysis's GROMACS test files (adenylate kinase, `adk_oplsaa.tpr` and `.xtc`, 47,681 atoms), Concordance's numbers equal MDAnalysis's documented recipe run on the full system (largest difference 3 × 10⁻⁷ nm). The same holds for a `.gro` topology.
@@ -257,6 +280,9 @@ There are 71 automated tests (`pytest`) and a self-test anyone can run (`concord
 - **File formats don't change the answer.** The same runs written as GROMACS `.xtc` files give the same verdicts as the mdCATH files, to within the 0.001 nm precision `.xtc` stores.
 - **Split proteins are caught.** In MDAnalysis's GROMACS test trajectory the protein is split across the 80 Å periodic box: two neighbouring residues sit 79.5 Å apart. Concordance flags this, and `--unwrap` repairs it (largest neighbour distance 3.9 Å).
 - **Passports replay exactly.** Replaying a passport's command reproduces the same passport id; changing any parameter changes it.
+
+### Feature coverage
+
 - **The PyMOL script colours correctly.** Run in PyMOL 3.2, it colours each residue by its class.
 - **The report's live answers match the engine.** Dragging across the chart, or typing a question, recomputes the verdict in the browser from the embedded numbers. A test runs the page's own JavaScript (`concordance/assets/logic.js`) in Node and checks it against the Python engine on every possible stretch of the test protein (all 465), and the command the page offers reproduces the same verdict at the command line.
 - **The question box is simple on purpose.** It is not a language model: it recognises a handful of question types with word patterns (36 test questions, from "is 9–11 flexible in run 2?" to "what does the orange mean?"), shows how it read each one, answers only from the page's numbers, and says so when it doesn't understand. Nothing is sent anywhere, so it works offline. For open-ended questions, use Claude with the Concordance tools (below).
