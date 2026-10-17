@@ -15,6 +15,7 @@ venv/
 .pytest_cache/
 build/
 dist/
+uv.lock
 
 # Editors and operating systems
 .DS_Store
