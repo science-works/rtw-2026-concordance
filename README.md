@@ -1,3 +1,14 @@
+> [!NOTE]
+> **Hackathon submission snapshot**
+>
+> This repository preserves the version submitted to **Reinvent the Wheel, 16–18 October 2026**, hosted by [Science Works](https://science.works) and [Inherent Laboratories](https://inherentlabs.ai/).
+>
+> **For the latest version, issues and contributions, visit the original project: [tammy357/concordance](https://github.com/tammy357/concordance).**
+>
+> Submitted version: [`1e26213`](https://github.com/science-works/rtw-2026-concordance/tree/1e26213dd779d1c466d05f719f62ad7e8d6567e5). This notice was added after submission. Nothing else in the repository has changed.
+
+---
+
 # Concordance
 
 **Does what your protein simulation tells you hold up when it is run again?**
